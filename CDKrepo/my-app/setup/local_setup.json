@@ -1,0 +1,31 @@
+[
+	{
+		"ParameterKey": "env",
+		"ParameterValue": "stream5qa"
+	},
+	{
+		"ParameterKey": "role_lambda",
+		"ParameterValue": "roles_policies/role_lambda.json"
+	},
+    {
+		"ParameterKey": "role_glue",
+		"ParameterValue": "roles_policies/role_glue.json"
+	},
+	{
+		"ParameterKey": "script_bucket_name",
+		"ParameterValue": "script-bucket1999"
+	},
+	{
+		"ParameterKey": "feed_bucket_name",
+		"ParameterValue": "feed-bucket1999"
+	},
+	{
+		"ParameterKey": "module",
+		"ParameterValue": "sample-code"
+	},
+	{
+		"ParameterKey": "db",
+		"ParameterValue": "MONGODB"
+	}
+
+]

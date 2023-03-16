@@ -1,0 +1,1724 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "my-app": {
+        "id": "my-app",
+        "path": "my-app",
+        "children": {
+          "ScriptBucket": {
+            "id": "ScriptBucket",
+            "path": "my-app/ScriptBucket",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/ScriptBucket/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {
+                    "bucketName": "stream5qa-script-bucket1999"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.65.0"
+            }
+          },
+          "FeedBucket": {
+            "id": "FeedBucket",
+            "path": "my-app/FeedBucket",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/FeedBucket/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {
+                    "bucketName": "stream5qa-feed-bucket1999"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.65.0"
+                }
+              },
+              "Notifications": {
+                "id": "Notifications",
+                "path": "my-app/FeedBucket/Notifications",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "my-app/FeedBucket/Notifications/Resource",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.65.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.256"
+                }
+              },
+              "AllowBucketNotificationsTomyapplambdafunc3E48F8F2": {
+                "id": "AllowBucketNotificationsTomyapplambdafunc3E48F8F2",
+                "path": "my-app/FeedBucket/AllowBucketNotificationsTomyapplambdafunc3E48F8F2",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "lambdafuncCDB7F2B7",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "s3.amazonaws.com",
+                    "sourceAccount": {
+                      "Ref": "AWS::AccountId"
+                    },
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "FeedBucket0A59BD93",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.65.0"
+            }
+          },
+          "stream5qa-glue-job-role": {
+            "id": "stream5qa-glue-job-role",
+            "path": "my-app/stream5qa-glue-job-role",
+            "children": {
+              "Importstream5qa-glue-job-role": {
+                "id": "Importstream5qa-glue-job-role",
+                "path": "my-app/stream5qa-glue-job-role/Importstream5qa-glue-job-role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.65.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/stream5qa-glue-job-role/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "glue.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.65.0"
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "my-app/stream5qa-glue-job-role/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "my-app/stream5qa-glue-job-role/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "application-autoscaling:DeleteScalingPolicy",
+                                "application-autoscaling:DeregisterScalableTarget",
+                                "application-autoscaling:DescribeScalableTargets",
+                                "application-autoscaling:DescribeScalingActivities",
+                                "application-autoscaling:DescribeScalingPolicies",
+                                "application-autoscaling:PutScalingPolicy",
+                                "application-autoscaling:RegisterScalableTarget",
+                                "cloudwatch:DeleteAlarms",
+                                "cloudwatch:DescribeAlarmHistory",
+                                "cloudwatch:DescribeAlarms",
+                                "cloudwatch:DescribeAlarmsForMetric",
+                                "cloudwatch:GetInsightRuleReport",
+                                "cloudwatch:GetMetricData",
+                                "cloudwatch:GetMetricStatistics",
+                                "cloudwatch:ListMetrics",
+                                "cloudwatch:PutMetricAlarm",
+                                "cloudwatch:PutMetricData",
+                                "datapipeline:ActivatePipeline",
+                                "datapipeline:CreatePipeline",
+                                "datapipeline:DeletePipeline",
+                                "datapipeline:DescribeObjects",
+                                "datapipeline:DescribePipelines",
+                                "datapipeline:GetPipelineDefinition",
+                                "datapipeline:ListPipelines",
+                                "datapipeline:PutPipelineDefinition",
+                                "datapipeline:QueryObjects",
+                                "dax:*",
+                                "ds:CreateComputer",
+                                "ds:DescribeDirectories",
+                                "dynamodb:*",
+                                "ec2:DescribeSecurityGroups",
+                                "ec2:DescribeSubnets",
+                                "ec2:DescribeVpcs",
+                                "glue:*",
+                                "iam:CreateServiceLinkedRole",
+                                "iam:DeleteServiceLinkedRole",
+                                "iam:GetRole",
+                                "iam:GetRolePolicy",
+                                "iam:GetServiceLinkedRoleDeletionStatus",
+                                "iam:ListRolePolicies",
+                                "iam:ListRoles",
+                                "iam:PassRole",
+                                "kinesis:DescribeStream",
+                                "kinesis:DescribeStreamSummary",
+                                "kinesis:ListStreams",
+                                "kms:DescribeKey",
+                                "kms:ListAliases",
+                                "lambda:CreateEventSourceMapping",
+                                "lambda:CreateFunction",
+                                "lambda:DeleteEventSourceMapping",
+                                "lambda:DeleteFunction",
+                                "lambda:GetFunctionConfiguration",
+                                "lambda:ListEventSourceMappings",
+                                "lambda:ListFunctions",
+                                "logs:*",
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents",
+                                "resource-groups:CreateGroup",
+                                "resource-groups:DeleteGroup",
+                                "resource-groups:GetGroup",
+                                "resource-groups:GetGroupQuery",
+                                "resource-groups:ListGroupResources",
+                                "resource-groups:ListGroups",
+                                "s3-object-lambda:*",
+                                "s3:*",
+                                "s3:CreateBucket",
+                                "s3:DeleteObject",
+                                "s3:GetBucketAcl",
+                                "s3:GetBucketLocation",
+                                "s3:GetObject",
+                                "s3:ListAllMyBuckets",
+                                "s3:ListBucket",
+                                "s3:PutObject",
+                                "sns:CreateTopic",
+                                "sns:DeleteTopic",
+                                "sns:ListSubscriptions",
+                                "sns:ListSubscriptionsByTopic",
+                                "sns:ListTopics",
+                                "sns:SetTopicAttributes",
+                                "sns:Subscribe",
+                                "sns:Unsubscribe",
+                                "ssm:*",
+                                "ssmmessages:CreateControlChannel",
+                                "ssmmessages:CreateDataChannel",
+                                "ssmmessages:OpenControlChannel",
+                                "ssmmessages:OpenDataChannel",
+                                "tag:GetResources"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": [
+                                "*",
+                                "arn:aws:cloudwatch:*:*:insight-rule/DynamoDBContributorInsights*",
+                                "arn:aws:iam::*:role/aws-service-role/ssm.amazonaws.com/AWSServiceRoleForAmazonSSM*",
+                                "arn:aws:logs:*:*:/aws-glue/*",
+                                "arn:aws:s3:::*/*aws-glue-*/*",
+                                "arn:aws:s3:::aws-glue-*",
+                                "arn:aws:s3:::aws-glue-*/*",
+                                "arn:aws:s3:::crawler-public*",
+                                "arn:aws:s3:::feed-bucket1368/dashboard-data/*",
+                                "arn:aws:s3:::script-bucket1368/dashboard-data/*"
+                              ]
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "stream5qagluejobroleDefaultPolicy03EFB7AE",
+                        "roles": [
+                          {
+                            "Ref": "stream5qagluejobrole1EB76B32"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                      "version": "2.65.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.65.0"
+            }
+          },
+          "demoGlueJob": {
+            "id": "demoGlueJob",
+            "path": "my-app/demoGlueJob",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Glue::Job",
+              "aws:cdk:cloudformation:props": {
+                "command": {
+                  "name": "glueetl",
+                  "pythonVersion": "3",
+                  "scriptLocation": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "s3://",
+                        {
+                          "Ref": "ScriptBucketAAD020DD"
+                        },
+                        "/stream5qa/scripts/glue_script.py"
+                      ]
+                    ]
+                  }
+                },
+                "role": {
+                  "Ref": "stream5qagluejobrole1EB76B32"
+                },
+                "defaultArguments": {
+                  "--extra-py-files": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "s3://",
+                        {
+                          "Ref": "ScriptBucketAAD020DD"
+                        },
+                        "/stream5qa/package/sample-code.zip"
+                      ]
+                    ]
+                  }
+                },
+                "glueVersion": "2.0",
+                "maxRetries": 0,
+                "name": "stream5qa_demoGlueJob",
+                "numberOfWorkers": 10,
+                "workerType": "G.1X"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_glue.CfnJob",
+              "version": "2.65.0"
+            }
+          },
+          "stream5qa-lambda-job-role": {
+            "id": "stream5qa-lambda-job-role",
+            "path": "my-app/stream5qa-lambda-job-role",
+            "children": {
+              "Importstream5qa-lambda-job-role": {
+                "id": "Importstream5qa-lambda-job-role",
+                "path": "my-app/stream5qa-lambda-job-role/Importstream5qa-lambda-job-role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.65.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/stream5qa-lambda-job-role/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.65.0"
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "my-app/stream5qa-lambda-job-role/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "my-app/stream5qa-lambda-job-role/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "cloudwatch:PutMetricData",
+                                "ds:CreateComputer",
+                                "ds:DescribeDirectories",
+                                "ec2:CreateNetworkInterface",
+                                "ec2:CreateTags",
+                                "ec2:DeleteNetworkInterface",
+                                "ec2:DeleteTags",
+                                "ec2:DescribeInstanceStatus",
+                                "ec2:DescribeNetworkInterfaces",
+                                "ec2:DescribeRouteTables",
+                                "ec2:DescribeSecurityGroups",
+                                "ec2:DescribeSubnets",
+                                "ec2:DescribeVpcAttribute",
+                                "ec2:DescribeVpcEndpoints",
+                                "ec2messages:*",
+                                "glue:*",
+                                "iam:CreateServiceLinkedRole",
+                                "iam:DeleteServiceLinkedRole",
+                                "iam:GetRole",
+                                "iam:GetRolePolicy",
+                                "iam:GetServiceLinkedRoleDeletionStatus",
+                                "iam:ListRolePolicies",
+                                "logs:*",
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents",
+                                "s3:CreateBucket",
+                                "s3:DeleteObject",
+                                "s3:GetBucketAcl",
+                                "s3:GetBucketLocation",
+                                "s3:GetObject",
+                                "s3:ListAllMyBuckets",
+                                "s3:ListBucket",
+                                "s3:PutObject",
+                                "ssm:*",
+                                "ssmmessages:CreateControlChannel",
+                                "ssmmessages:CreateDataChannel",
+                                "ssmmessages:OpenControlChannel",
+                                "ssmmessages:OpenDataChannel"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": [
+                                "*",
+                                "arn:aws:ec2:*:*:instance/*",
+                                "arn:aws:ec2:*:*:network-interface/*",
+                                "arn:aws:ec2:*:*:security-group/*",
+                                "arn:aws:iam::*:role/aws-service-role/ssm.amazonaws.com/AWSServiceRoleForAmazonSSM*",
+                                "arn:aws:logs:*:*:/aws-glue/*",
+                                "arn:aws:s3:::*/*aws-glue-*/*",
+                                "arn:aws:s3:::aws-glue-*",
+                                "arn:aws:s3:::aws-glue-*/*",
+                                "arn:aws:s3:::crawler-public*",
+                                "arn:aws:s3:::script-bucket1368/dashboard-data/*"
+                              ]
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "stream5qalambdajobroleDefaultPolicy1E7784A7",
+                        "roles": [
+                          {
+                            "Ref": "stream5qalambdajobrole7C6F6288"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                      "version": "2.65.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.65.0"
+            }
+          },
+          "lambda_func": {
+            "id": "lambda_func",
+            "path": "my-app/lambda_func",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/lambda_func/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "zipFile": "import boto3\n\nprint('Loading function')\n\ns3 = boto3.client('s3')\nglue = boto3.client('glue')\nssm=boto3.client('ssm')\n\ndef lambda_handler(event, context):\n\n    envParam = ssm.get_parameter(Name='/env', WithDecryption=True)\n    env = envParam['Parameter']['Value']\n\n\n    glueParam = ssm.get_parameter(Name='/'+env +'/myapp/gluejob', WithDecryption=True)\n    gluename = glueParam['Parameter']['Value']\n\n    bucket_name =event['Records'][0]['s3']['bucket']['name']\n    event_key = event['Records'][0]['s3']['object']['key']\n    print(\" lambda triggered for bucket: \"+bucket_name+\" , event_key: \"+event_key)\n    glueJobName= gluename\n    runId = glue.start_job_run(JobName= glueJobName,Arguments={})\n    print(runId)\n    status = glue.get_job_run(JobName= glueJobName, RunId=runId['JobRunId'])\n    print(status)\n    return bucket_name, event_key\n    \n    \n\n\n\n    \n\n    "
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "stream5qalambdajobrole7C6F6288",
+                        "Arn"
+                      ]
+                    },
+                    "environment": {
+                      "variables": {
+                        "BUCKET": {
+                          "Ref": "FeedBucket0A59BD93"
+                        }
+                      }
+                    },
+                    "functionName": "stream5qa_etl_func",
+                    "handler": "index.lambda_handler",
+                    "runtime": "python3.7",
+                    "timeout": 60
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.65.0"
+            }
+          },
+          "BucketNotificationsHandler050a0587b7544547bf325f094a3db834": {
+            "id": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834",
+            "path": "my-app/BucketNotificationsHandler050a0587b7544547bf325f094a3db834",
+            "children": {
+              "Role": {
+                "id": "Role",
+                "path": "my-app/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role",
+                "children": {
+                  "ImportRole": {
+                    "id": "ImportRole",
+                    "path": "my-app/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/ImportRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "my-app/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "my-app/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "my-app/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "s3:PutBucketNotification",
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleDefaultPolicy2CF63D36",
+                            "roles": [
+                              {
+                                "Ref": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.65.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.65.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.65.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Resource",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.256"
+            }
+          },
+          "ETLVpc": {
+            "id": "ETLVpc",
+            "path": "my-app/ETLVpc",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/ETLVpc/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.0.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "my-app/ETLVpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                  "version": "2.65.0"
+                }
+              },
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "my-app/ETLVpc/PublicSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "my-app/ETLVpc/PublicSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ETLVpc7F009061"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.0.0/18",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "my-app/ETLVpc/PublicSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "my-app/ETLVpc/PublicSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ETLVpc7F009061"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "my-app/ETLVpc/PublicSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "ETLVpcPublicSubnet1RouteTableE01A4258"
+                        },
+                        "subnetId": {
+                          "Ref": "ETLVpcPublicSubnet1Subnet5661CC02"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "my-app/ETLVpc/PublicSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "ETLVpcPublicSubnet1RouteTableE01A4258"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "ETLVpcIGW6FB8CB02"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "my-app/ETLVpc/PublicSubnet1/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "my-app/ETLVpc/PublicSubnet1/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "subnetId": {
+                          "Ref": "ETLVpcPublicSubnet1Subnet5661CC02"
+                        },
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "ETLVpcPublicSubnet1EIP8CE4CA35",
+                            "AllocationId"
+                          ]
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.65.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.65.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "my-app/ETLVpc/PublicSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "my-app/ETLVpc/PublicSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ETLVpc7F009061"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.64.0/18",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PublicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "my-app/ETLVpc/PublicSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "my-app/ETLVpc/PublicSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ETLVpc7F009061"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PublicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "my-app/ETLVpc/PublicSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "ETLVpcPublicSubnet2RouteTableF8A683C4"
+                        },
+                        "subnetId": {
+                          "Ref": "ETLVpcPublicSubnet2SubnetE31AAE21"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "my-app/ETLVpc/PublicSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "ETLVpcPublicSubnet2RouteTableF8A683C4"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "ETLVpcIGW6FB8CB02"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "my-app/ETLVpc/PublicSubnet2/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PublicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "my-app/ETLVpc/PublicSubnet2/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "subnetId": {
+                          "Ref": "ETLVpcPublicSubnet2SubnetE31AAE21"
+                        },
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "ETLVpcPublicSubnet2EIPAAC76A65",
+                            "AllocationId"
+                          ]
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PublicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.65.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.65.0"
+                }
+              },
+              "PrivateSubnet1": {
+                "id": "PrivateSubnet1",
+                "path": "my-app/ETLVpc/PrivateSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "my-app/ETLVpc/PrivateSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ETLVpc7F009061"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.128.0/18",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PrivateSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "my-app/ETLVpc/PrivateSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "my-app/ETLVpc/PrivateSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ETLVpc7F009061"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PrivateSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "my-app/ETLVpc/PrivateSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "ETLVpcPrivateSubnet1RouteTable83F9E1C5"
+                        },
+                        "subnetId": {
+                          "Ref": "ETLVpcPrivateSubnet1Subnet7EBB6420"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "my-app/ETLVpc/PrivateSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "ETLVpcPrivateSubnet1RouteTable83F9E1C5"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "ETLVpcPublicSubnet1NATGateway22ABC366"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.65.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.65.0"
+                }
+              },
+              "PrivateSubnet2": {
+                "id": "PrivateSubnet2",
+                "path": "my-app/ETLVpc/PrivateSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "my-app/ETLVpc/PrivateSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ETLVpc7F009061"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "cidrBlock": "10.0.192.0/18",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PrivateSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "my-app/ETLVpc/PrivateSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "my-app/ETLVpc/PrivateSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "ETLVpc7F009061"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "my-app/ETLVpc/PrivateSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "my-app/ETLVpc/PrivateSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "ETLVpcPrivateSubnet2RouteTable48CCCFF8"
+                        },
+                        "subnetId": {
+                          "Ref": "ETLVpcPrivateSubnet2SubnetB11B56E3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "my-app/ETLVpc/PrivateSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "ETLVpcPrivateSubnet2RouteTable48CCCFF8"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "ETLVpcPublicSubnet2NATGateway57270DEC"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.65.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.65.0"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "my-app/ETLVpc/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "my-app/ETLVpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.65.0"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "my-app/ETLVpc/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "vpcId": {
+                      "Ref": "ETLVpc7F009061"
+                    },
+                    "internetGatewayId": {
+                      "Ref": "ETLVpcIGW6FB8CB02"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+              "version": "2.65.0"
+            }
+          },
+          "web-server-sg": {
+            "id": "web-server-sg",
+            "path": "my-app/web-server-sg",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/web-server-sg/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "security group for a web server",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "securityGroupIngress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 22,
+                        "toPort": 22,
+                        "description": "allow SSH access from anywhere"
+                      },
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 27017,
+                        "toPort": 27017,
+                        "description": "mongo"
+                      },
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "-1",
+                        "description": "allow all traffic"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "ETLVpc7F009061"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.65.0"
+            }
+          },
+          "MyCfnKeyPair": {
+            "id": "MyCfnKeyPair",
+            "path": "my-app/MyCfnKeyPair",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::EC2::KeyPair",
+              "aws:cdk:cloudformation:props": {
+                "keyName": "stream5qa_etl_key"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.CfnKeyPair",
+              "version": "2.65.0"
+            }
+          },
+          "myInstance1": {
+            "id": "myInstance1",
+            "path": "my-app/myInstance1",
+            "children": {
+              "InstanceRole": {
+                "id": "InstanceRole",
+                "path": "my-app/myInstance1/InstanceRole",
+                "children": {
+                  "ImportInstanceRole": {
+                    "id": "ImportInstanceRole",
+                    "path": "my-app/myInstance1/InstanceRole/ImportInstanceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "my-app/myInstance1/InstanceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "ec2.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "stream5qa_etl_instance"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.65.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.65.0"
+                }
+              },
+              "InstanceProfile": {
+                "id": "InstanceProfile",
+                "path": "my-app/myInstance1/InstanceProfile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      {
+                        "Ref": "myInstance1InstanceRole4A29B931"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                  "version": "2.65.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/myInstance1/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                  "aws:cdk:cloudformation:props": {
+                    "availabilityZone": {
+                      "Fn::Select": [
+                        0,
+                        {
+                          "Fn::GetAZs": ""
+                        }
+                      ]
+                    },
+                    "iamInstanceProfile": {
+                      "Ref": "myInstance1InstanceProfileEB976795"
+                    },
+                    "imageId": {
+                      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664ebsC96584B6F00A464EAD1953AFF4B05118Parameter"
+                    },
+                    "instanceType": "t2.micro",
+                    "keyName": "stream5qa_etl_key",
+                    "securityGroupIds": [
+                      {
+                        "Fn::GetAtt": [
+                          "webserversgD43E599E",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnetId": {
+                      "Ref": "ETLVpcPublicSubnet1Subnet5661CC02"
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "stream5qa_etl_instance"
+                      }
+                    ],
+                    "userData": {
+                      "Fn::Base64": "#!/bin/bash\necho \"[mongodb-org-4.2]\nname=MongoDB Repository\nbaseurl=https://repo.mongodb.org/yum/amazon/2/mongodb-org/4.2/x86_64/\ngpgcheck=1\nenabled=1\ngpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc\"> /etc/yum.repos.d/mongodb-org-4.2.repo\nyum install -y mongodb-org\necho \"# mongod.conf\n\n# for documentation of all options, see:\n#   http://docs.mongodb.org/manual/reference/configuration-options/\n\n# where to write logging data.\nsystemLog:\n  destination: file\n  logAppend: true\n  path: /var/log/mongodb/mongod.log\n\n# Where and how to store data.\nstorage:\n  dbPath: /var/lib/mongo\n  journal:\n    enabled: true\n#  engine:\n#  wiredTiger:\n\n# how the process runs\nprocessManagement:\n  fork: true  # fork and run in background\n  pidFilePath: /var/run/mongodb/mongod.pid  # location of pidfile\n  timeZoneInfo: /usr/share/zoneinfo\n\n# network interfaces\nnet:\n  port: 27017\n  bindIp: 0.0.0.0  # Enter 0.0.0.0,:: to bind to all IPv4 and IPv6 addresses or, alternatively, use the net.bindIpAll setting.\n\n\n#security:\n\n#operationProfiling:\n\n#replication:\n\n#sharding:\n\n## Enterprise-Only Options\n\n#auditLog:\n\n#snmp:\"> /etc/mongod.conf \nservice mongod start\nchkconfig mongod on\n\n"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Instance",
+              "version": "2.65.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-ebs:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-ebs:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "path": "my-app/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-ebs:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.65.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-ebs:C96584B6-F00A-464E-AD19-53AFF4B05118": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-ebs:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "path": "my-app/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-ebs:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.65.0"
+            }
+          },
+          "ec2IP": {
+            "id": "ec2IP",
+            "path": "my-app/ec2IP",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/ec2IP/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                  "aws:cdk:cloudformation:props": {
+                    "type": "String",
+                    "value": {
+                      "Fn::GetAtt": [
+                        "myInstance112A675EA",
+                        "PublicIp"
+                      ]
+                    },
+                    "description": "IP Parameter value stored",
+                    "name": "/stream5qa/myapp/ec2ipbucket",
+                    "tier": "Standard"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+              "version": "2.65.0"
+            }
+          },
+          "scriptbucket": {
+            "id": "scriptbucket",
+            "path": "my-app/scriptbucket",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/scriptbucket/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                  "aws:cdk:cloudformation:props": {
+                    "type": "String",
+                    "value": {
+                      "Ref": "ScriptBucketAAD020DD"
+                    },
+                    "description": "S3 ScriptBucket Parameter value stored",
+                    "name": "/stream5qa/myapp/scriptbucket",
+                    "tier": "Standard"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+              "version": "2.65.0"
+            }
+          },
+          "feedbucket": {
+            "id": "feedbucket",
+            "path": "my-app/feedbucket",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/feedbucket/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                  "aws:cdk:cloudformation:props": {
+                    "type": "String",
+                    "value": {
+                      "Ref": "FeedBucket0A59BD93"
+                    },
+                    "description": "S3 FeedBucket Parameter value stored",
+                    "name": "/stream5qa/myapp/feedbucket",
+                    "tier": "Standard"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+              "version": "2.65.0"
+            }
+          },
+          "gluejob": {
+            "id": "gluejob",
+            "path": "my-app/gluejob",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/gluejob/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                  "aws:cdk:cloudformation:props": {
+                    "type": "String",
+                    "value": "stream5qa_demoGlueJob",
+                    "description": "GlueJob Parameter value stored",
+                    "name": "/stream5qa/myapp/gluejob",
+                    "tier": "Standard"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+              "version": "2.65.0"
+            }
+          },
+          "env": {
+            "id": "env",
+            "path": "my-app/env",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/env/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                  "aws:cdk:cloudformation:props": {
+                    "type": "String",
+                    "value": "stream5qa",
+                    "description": "Environment is stored",
+                    "name": "/env",
+                    "tier": "Standard"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+              "version": "2.65.0"
+            }
+          },
+          "db": {
+            "id": "db",
+            "path": "my-app/db",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/db/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                  "aws:cdk:cloudformation:props": {
+                    "type": "String",
+                    "value": "MONGODB",
+                    "description": "Database is stored",
+                    "name": "/database",
+                    "tier": "Standard"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+              "version": "2.65.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "my-app/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "my-app/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.65.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "my-app/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.256"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "my-app/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.65.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "my-app/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.65.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.65.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.256"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.65.0"
+    }
+  }
+}

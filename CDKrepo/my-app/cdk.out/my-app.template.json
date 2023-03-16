@@ -1,0 +1,1412 @@
+{
+ "Resources": {
+  "ScriptBucketAAD020DD": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketName": "stream5qa-script-bucket1999"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "my-app/ScriptBucket/Resource"
+   }
+  },
+  "FeedBucket0A59BD93": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketName": "stream5qa-feed-bucket1999"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "my-app/FeedBucket/Resource"
+   }
+  },
+  "FeedBucketNotificationsFA88D54B": {
+   "Type": "Custom::S3BucketNotifications",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "FeedBucket0A59BD93"
+    },
+    "NotificationConfiguration": {
+     "LambdaFunctionConfigurations": [
+      {
+       "Events": [
+        "s3:ObjectCreated:*"
+       ],
+       "LambdaFunctionArn": {
+        "Fn::GetAtt": [
+         "lambdafuncCDB7F2B7",
+         "Arn"
+        ]
+       }
+      }
+     ]
+    },
+    "Managed": true
+   },
+   "DependsOn": [
+    "FeedBucketAllowBucketNotificationsTomyapplambdafunc3E48F8F2DFED6542"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-app/FeedBucket/Notifications/Resource"
+   }
+  },
+  "FeedBucketAllowBucketNotificationsTomyapplambdafunc3E48F8F2DFED6542": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "lambdafuncCDB7F2B7",
+      "Arn"
+     ]
+    },
+    "Principal": "s3.amazonaws.com",
+    "SourceAccount": {
+     "Ref": "AWS::AccountId"
+    },
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "FeedBucket0A59BD93",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/FeedBucket/AllowBucketNotificationsTomyapplambdafunc3E48F8F2"
+   }
+  },
+  "stream5qagluejobrole1EB76B32": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "glue.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/stream5qa-glue-job-role/Resource"
+   }
+  },
+  "stream5qagluejobroleDefaultPolicy03EFB7AE": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "application-autoscaling:DeleteScalingPolicy",
+        "application-autoscaling:DeregisterScalableTarget",
+        "application-autoscaling:DescribeScalableTargets",
+        "application-autoscaling:DescribeScalingActivities",
+        "application-autoscaling:DescribeScalingPolicies",
+        "application-autoscaling:PutScalingPolicy",
+        "application-autoscaling:RegisterScalableTarget",
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:DescribeAlarmHistory",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:DescribeAlarmsForMetric",
+        "cloudwatch:GetInsightRuleReport",
+        "cloudwatch:GetMetricData",
+        "cloudwatch:GetMetricStatistics",
+        "cloudwatch:ListMetrics",
+        "cloudwatch:PutMetricAlarm",
+        "cloudwatch:PutMetricData",
+        "datapipeline:ActivatePipeline",
+        "datapipeline:CreatePipeline",
+        "datapipeline:DeletePipeline",
+        "datapipeline:DescribeObjects",
+        "datapipeline:DescribePipelines",
+        "datapipeline:GetPipelineDefinition",
+        "datapipeline:ListPipelines",
+        "datapipeline:PutPipelineDefinition",
+        "datapipeline:QueryObjects",
+        "dax:*",
+        "ds:CreateComputer",
+        "ds:DescribeDirectories",
+        "dynamodb:*",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "glue:*",
+        "iam:CreateServiceLinkedRole",
+        "iam:DeleteServiceLinkedRole",
+        "iam:GetRole",
+        "iam:GetRolePolicy",
+        "iam:GetServiceLinkedRoleDeletionStatus",
+        "iam:ListRolePolicies",
+        "iam:ListRoles",
+        "iam:PassRole",
+        "kinesis:DescribeStream",
+        "kinesis:DescribeStreamSummary",
+        "kinesis:ListStreams",
+        "kms:DescribeKey",
+        "kms:ListAliases",
+        "lambda:CreateEventSourceMapping",
+        "lambda:CreateFunction",
+        "lambda:DeleteEventSourceMapping",
+        "lambda:DeleteFunction",
+        "lambda:GetFunctionConfiguration",
+        "lambda:ListEventSourceMappings",
+        "lambda:ListFunctions",
+        "logs:*",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "resource-groups:CreateGroup",
+        "resource-groups:DeleteGroup",
+        "resource-groups:GetGroup",
+        "resource-groups:GetGroupQuery",
+        "resource-groups:ListGroupResources",
+        "resource-groups:ListGroups",
+        "s3-object-lambda:*",
+        "s3:*",
+        "s3:CreateBucket",
+        "s3:DeleteObject",
+        "s3:GetBucketAcl",
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket",
+        "s3:PutObject",
+        "sns:CreateTopic",
+        "sns:DeleteTopic",
+        "sns:ListSubscriptions",
+        "sns:ListSubscriptionsByTopic",
+        "sns:ListTopics",
+        "sns:SetTopicAttributes",
+        "sns:Subscribe",
+        "sns:Unsubscribe",
+        "ssm:*",
+        "ssmmessages:CreateControlChannel",
+        "ssmmessages:CreateDataChannel",
+        "ssmmessages:OpenControlChannel",
+        "ssmmessages:OpenDataChannel",
+        "tag:GetResources"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "*",
+        "arn:aws:cloudwatch:*:*:insight-rule/DynamoDBContributorInsights*",
+        "arn:aws:iam::*:role/aws-service-role/ssm.amazonaws.com/AWSServiceRoleForAmazonSSM*",
+        "arn:aws:logs:*:*:/aws-glue/*",
+        "arn:aws:s3:::*/*aws-glue-*/*",
+        "arn:aws:s3:::aws-glue-*",
+        "arn:aws:s3:::aws-glue-*/*",
+        "arn:aws:s3:::crawler-public*",
+        "arn:aws:s3:::feed-bucket1368/dashboard-data/*",
+        "arn:aws:s3:::script-bucket1368/dashboard-data/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "stream5qagluejobroleDefaultPolicy03EFB7AE",
+    "Roles": [
+     {
+      "Ref": "stream5qagluejobrole1EB76B32"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/stream5qa-glue-job-role/DefaultPolicy/Resource"
+   }
+  },
+  "demoGlueJob": {
+   "Type": "AWS::Glue::Job",
+   "Properties": {
+    "Command": {
+     "Name": "glueetl",
+     "PythonVersion": "3",
+     "ScriptLocation": {
+      "Fn::Join": [
+       "",
+       [
+        "s3://",
+        {
+         "Ref": "ScriptBucketAAD020DD"
+        },
+        "/stream5qa/scripts/glue_script.py"
+       ]
+      ]
+     }
+    },
+    "Role": {
+     "Ref": "stream5qagluejobrole1EB76B32"
+    },
+    "DefaultArguments": {
+     "--extra-py-files": {
+      "Fn::Join": [
+       "",
+       [
+        "s3://",
+        {
+         "Ref": "ScriptBucketAAD020DD"
+        },
+        "/stream5qa/package/sample-code.zip"
+       ]
+      ]
+     }
+    },
+    "GlueVersion": "2.0",
+    "MaxRetries": 0,
+    "Name": "stream5qa_demoGlueJob",
+    "NumberOfWorkers": 10,
+    "WorkerType": "G.1X"
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/demoGlueJob"
+   }
+  },
+  "stream5qalambdajobrole7C6F6288": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/stream5qa-lambda-job-role/Resource"
+   }
+  },
+  "stream5qalambdajobroleDefaultPolicy1E7784A7": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "cloudwatch:PutMetricData",
+        "ds:CreateComputer",
+        "ds:DescribeDirectories",
+        "ec2:CreateNetworkInterface",
+        "ec2:CreateTags",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DeleteTags",
+        "ec2:DescribeInstanceStatus",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcAttribute",
+        "ec2:DescribeVpcEndpoints",
+        "ec2messages:*",
+        "glue:*",
+        "iam:CreateServiceLinkedRole",
+        "iam:DeleteServiceLinkedRole",
+        "iam:GetRole",
+        "iam:GetRolePolicy",
+        "iam:GetServiceLinkedRoleDeletionStatus",
+        "iam:ListRolePolicies",
+        "logs:*",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "s3:CreateBucket",
+        "s3:DeleteObject",
+        "s3:GetBucketAcl",
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket",
+        "s3:PutObject",
+        "ssm:*",
+        "ssmmessages:CreateControlChannel",
+        "ssmmessages:CreateDataChannel",
+        "ssmmessages:OpenControlChannel",
+        "ssmmessages:OpenDataChannel"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "*",
+        "arn:aws:ec2:*:*:instance/*",
+        "arn:aws:ec2:*:*:network-interface/*",
+        "arn:aws:ec2:*:*:security-group/*",
+        "arn:aws:iam::*:role/aws-service-role/ssm.amazonaws.com/AWSServiceRoleForAmazonSSM*",
+        "arn:aws:logs:*:*:/aws-glue/*",
+        "arn:aws:s3:::*/*aws-glue-*/*",
+        "arn:aws:s3:::aws-glue-*",
+        "arn:aws:s3:::aws-glue-*/*",
+        "arn:aws:s3:::crawler-public*",
+        "arn:aws:s3:::script-bucket1368/dashboard-data/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "stream5qalambdajobroleDefaultPolicy1E7784A7",
+    "Roles": [
+     {
+      "Ref": "stream5qalambdajobrole7C6F6288"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/stream5qa-lambda-job-role/DefaultPolicy/Resource"
+   }
+  },
+  "lambdafuncCDB7F2B7": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "import boto3\n\nprint('Loading function')\n\ns3 = boto3.client('s3')\nglue = boto3.client('glue')\nssm=boto3.client('ssm')\n\ndef lambda_handler(event, context):\n\n    envParam = ssm.get_parameter(Name='/env', WithDecryption=True)\n    env = envParam['Parameter']['Value']\n\n\n    glueParam = ssm.get_parameter(Name='/'+env +'/myapp/gluejob', WithDecryption=True)\n    gluename = glueParam['Parameter']['Value']\n\n    bucket_name =event['Records'][0]['s3']['bucket']['name']\n    event_key = event['Records'][0]['s3']['object']['key']\n    print(\" lambda triggered for bucket: \"+bucket_name+\" , event_key: \"+event_key)\n    glueJobName= gluename\n    runId = glue.start_job_run(JobName= glueJobName,Arguments={})\n    print(runId)\n    status = glue.get_job_run(JobName= glueJobName, RunId=runId['JobRunId'])\n    print(status)\n    return bucket_name, event_key\n    \n    \n\n\n\n    \n\n    "
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "stream5qalambdajobrole7C6F6288",
+      "Arn"
+     ]
+    },
+    "Environment": {
+     "Variables": {
+      "BUCKET": {
+       "Ref": "FeedBucket0A59BD93"
+      }
+     }
+    },
+    "FunctionName": "stream5qa_etl_func",
+    "Handler": "index.lambda_handler",
+    "Runtime": "python3.7",
+    "Timeout": 60
+   },
+   "DependsOn": [
+    "stream5qalambdajobroleDefaultPolicy1E7784A7",
+    "stream5qalambdajobrole7C6F6288"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-app/lambda_func/Resource"
+   }
+  },
+  "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/Resource"
+   }
+  },
+  "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleDefaultPolicy2CF63D36": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:PutBucketNotification",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleDefaultPolicy2CF63D36",
+    "Roles": [
+     {
+      "Ref": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/DefaultPolicy/Resource"
+   }
+  },
+  "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Description": "AWS CloudFormation handler for \"Custom::S3BucketNotifications\" resources (@aws-cdk/aws-s3)",
+    "Code": {
+     "ZipFile": "import boto3  # type: ignore\nimport json\nimport logging\nimport urllib.request\n\ns3 = boto3.client(\"s3\")\n\nEVENTBRIDGE_CONFIGURATION = 'EventBridgeConfiguration'\n\nCONFIGURATION_TYPES = [\"TopicConfigurations\", \"QueueConfigurations\", \"LambdaFunctionConfigurations\"]\n\ndef handler(event: dict, context):\n  response_status = \"SUCCESS\"\n  error_message = \"\"\n  try:\n    props = event[\"ResourceProperties\"]\n    bucket = props[\"BucketName\"]\n    notification_configuration = props[\"NotificationConfiguration\"]\n    request_type = event[\"RequestType\"]\n    managed = props.get('Managed', 'true').lower() == 'true'\n    stack_id = event['StackId']\n\n    if managed:\n      config = handle_managed(request_type, notification_configuration)\n    else:\n      config = handle_unmanaged(bucket, stack_id, request_type, notification_configuration)\n\n    put_bucket_notification_configuration(bucket, config)\n  except Exception as e:\n    logging.exception(\"Failed to put bucket notification configuration\")\n    response_status = \"FAILED\"\n    error_message = f\"Error: {str(e)}. \"\n  finally:\n    submit_response(event, context, response_status, error_message)\n\ndef handle_managed(request_type, notification_configuration):\n  if request_type == 'Delete':\n    return {}\n  return notification_configuration\n\ndef handle_unmanaged(bucket, stack_id, request_type, notification_configuration):\n  external_notifications = find_external_notifications(bucket, stack_id)\n\n  if request_type == 'Delete':\n    return external_notifications\n\n  def with_id(notification):\n    notification['Id'] = f\"{stack_id}-{hash(json.dumps(notification, sort_keys=True))}\"\n    return notification\n\n  notifications = {}\n  for t in CONFIGURATION_TYPES:\n    external = external_notifications.get(t, [])\n    incoming = [with_id(n) for n in notification_configuration.get(t, [])]\n    notifications[t] = external + incoming\n\n  if EVENTBRIDGE_CONFIGURATION in notification_configuration:\n    notifications[EVENTBRIDGE_CONFIGURATION] = notification_configuration[EVENTBRIDGE_CONFIGURATION]\n  elif EVENTBRIDGE_CONFIGURATION in external_notifications:\n    notifications[EVENTBRIDGE_CONFIGURATION] = external_notifications[EVENTBRIDGE_CONFIGURATION]\n\n  return notifications\n\ndef find_external_notifications(bucket, stack_id):\n  existing_notifications = get_bucket_notification_configuration(bucket)\n  external_notifications = {}\n  for t in CONFIGURATION_TYPES:\n    external_notifications[t] = [n for n in existing_notifications.get(t, []) if not n['Id'].startswith(f\"{stack_id}-\")]\n\n  if EVENTBRIDGE_CONFIGURATION in existing_notifications:\n    external_notifications[EVENTBRIDGE_CONFIGURATION] = existing_notifications[EVENTBRIDGE_CONFIGURATION]\n\n  return external_notifications\n\ndef get_bucket_notification_configuration(bucket):\n  return s3.get_bucket_notification_configuration(Bucket=bucket)\n\ndef put_bucket_notification_configuration(bucket, notification_configuration):\n  s3.put_bucket_notification_configuration(Bucket=bucket, NotificationConfiguration=notification_configuration)\n\ndef submit_response(event: dict, context, response_status: str, error_message: str):\n  response_body = json.dumps(\n    {\n      \"Status\": response_status,\n      \"Reason\": f\"{error_message}See the details in CloudWatch Log Stream: {context.log_stream_name}\",\n      \"PhysicalResourceId\": event.get(\"PhysicalResourceId\") or event[\"LogicalResourceId\"],\n      \"StackId\": event[\"StackId\"],\n      \"RequestId\": event[\"RequestId\"],\n      \"LogicalResourceId\": event[\"LogicalResourceId\"],\n      \"NoEcho\": False,\n    }\n  ).encode(\"utf-8\")\n  headers = {\"content-type\": \"\", \"content-length\": str(len(response_body))}\n  try:\n    req = urllib.request.Request(url=event[\"ResponseURL\"], headers=headers, data=response_body, method=\"PUT\")\n    with urllib.request.urlopen(req) as response:\n      print(response.read().decode(\"utf-8\"))\n    print(\"Status code: \" + response.reason)\n  except Exception as e:\n      print(\"send(..) failed executing request.urlopen(..): \" + str(e))\n"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.9",
+    "Timeout": 300
+   },
+   "DependsOn": [
+    "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleDefaultPolicy2CF63D36",
+    "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-app/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Resource"
+   }
+  },
+  "ETLVpc7F009061": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/Resource"
+   }
+  },
+  "ETLVpcPublicSubnet1Subnet5661CC02": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ETLVpc7F009061"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet1/Subnet"
+   }
+  },
+  "ETLVpcPublicSubnet1RouteTableE01A4258": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ETLVpc7F009061"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "ETLVpcPublicSubnet1RouteTableAssociation18125A19": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ETLVpcPublicSubnet1RouteTableE01A4258"
+    },
+    "SubnetId": {
+     "Ref": "ETLVpcPublicSubnet1Subnet5661CC02"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "ETLVpcPublicSubnet1DefaultRouteDD6C016A": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ETLVpcPublicSubnet1RouteTableE01A4258"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "ETLVpcIGW6FB8CB02"
+    }
+   },
+   "DependsOn": [
+    "ETLVpcVPCGW415F7D0B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "ETLVpcPublicSubnet1EIP8CE4CA35": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet1/EIP"
+   }
+  },
+  "ETLVpcPublicSubnet1NATGateway22ABC366": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "ETLVpcPublicSubnet1Subnet5661CC02"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "ETLVpcPublicSubnet1EIP8CE4CA35",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "ETLVpcPublicSubnet1DefaultRouteDD6C016A",
+    "ETLVpcPublicSubnet1RouteTableAssociation18125A19"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet1/NATGateway"
+   }
+  },
+  "ETLVpcPublicSubnet2SubnetE31AAE21": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ETLVpc7F009061"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet2/Subnet"
+   }
+  },
+  "ETLVpcPublicSubnet2RouteTableF8A683C4": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ETLVpc7F009061"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "ETLVpcPublicSubnet2RouteTableAssociation427AFF40": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ETLVpcPublicSubnet2RouteTableF8A683C4"
+    },
+    "SubnetId": {
+     "Ref": "ETLVpcPublicSubnet2SubnetE31AAE21"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "ETLVpcPublicSubnet2DefaultRouteE9B70FC0": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ETLVpcPublicSubnet2RouteTableF8A683C4"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "ETLVpcIGW6FB8CB02"
+    }
+   },
+   "DependsOn": [
+    "ETLVpcVPCGW415F7D0B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "ETLVpcPublicSubnet2EIPAAC76A65": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet2/EIP"
+   }
+  },
+  "ETLVpcPublicSubnet2NATGateway57270DEC": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "ETLVpcPublicSubnet2SubnetE31AAE21"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "ETLVpcPublicSubnet2EIPAAC76A65",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "ETLVpcPublicSubnet2DefaultRouteE9B70FC0",
+    "ETLVpcPublicSubnet2RouteTableAssociation427AFF40"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PublicSubnet2/NATGateway"
+   }
+  },
+  "ETLVpcPrivateSubnet1Subnet7EBB6420": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ETLVpc7F009061"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PrivateSubnet1/Subnet"
+   }
+  },
+  "ETLVpcPrivateSubnet1RouteTable83F9E1C5": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ETLVpc7F009061"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PrivateSubnet1/RouteTable"
+   }
+  },
+  "ETLVpcPrivateSubnet1RouteTableAssociationAF6F120A": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ETLVpcPrivateSubnet1RouteTable83F9E1C5"
+    },
+    "SubnetId": {
+     "Ref": "ETLVpcPrivateSubnet1Subnet7EBB6420"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "ETLVpcPrivateSubnet1DefaultRouteB5855AE7": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ETLVpcPrivateSubnet1RouteTable83F9E1C5"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "ETLVpcPublicSubnet1NATGateway22ABC366"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "ETLVpcPrivateSubnet2SubnetB11B56E3": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ETLVpc7F009061"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PrivateSubnet2/Subnet"
+   }
+  },
+  "ETLVpcPrivateSubnet2RouteTable48CCCFF8": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ETLVpc7F009061"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PrivateSubnet2/RouteTable"
+   }
+  },
+  "ETLVpcPrivateSubnet2RouteTableAssociation929D881C": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ETLVpcPrivateSubnet2RouteTable48CCCFF8"
+    },
+    "SubnetId": {
+     "Ref": "ETLVpcPrivateSubnet2SubnetB11B56E3"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "ETLVpcPrivateSubnet2DefaultRoute529EA8CF": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ETLVpcPrivateSubnet2RouteTable48CCCFF8"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "ETLVpcPublicSubnet2NATGateway57270DEC"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "ETLVpcIGW6FB8CB02": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "my-app/ETLVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/IGW"
+   }
+  },
+  "ETLVpcVPCGW415F7D0B": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ETLVpc7F009061"
+    },
+    "InternetGatewayId": {
+     "Ref": "ETLVpcIGW6FB8CB02"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ETLVpc/VPCGW"
+   }
+  },
+  "webserversgD43E599E": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "security group for a web server",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "allow SSH access from anywhere",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "mongo",
+      "FromPort": 27017,
+      "IpProtocol": "tcp",
+      "ToPort": 27017
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "allow all traffic",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "ETLVpc7F009061"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/web-server-sg/Resource"
+   }
+  },
+  "MyCfnKeyPair": {
+   "Type": "AWS::EC2::KeyPair",
+   "Properties": {
+    "KeyName": "stream5qa_etl_key"
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/MyCfnKeyPair"
+   }
+  },
+  "myInstance1InstanceRole4A29B931": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "stream5qa_etl_instance"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/myInstance1/InstanceRole/Resource"
+   }
+  },
+  "myInstance1InstanceProfileEB976795": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "myInstance1InstanceRole4A29B931"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/myInstance1/InstanceProfile"
+   }
+  },
+  "myInstance112A675EA": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "IamInstanceProfile": {
+     "Ref": "myInstance1InstanceProfileEB976795"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664ebsC96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t2.micro",
+    "KeyName": "stream5qa_etl_key",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "webserversgD43E599E",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": {
+     "Ref": "ETLVpcPublicSubnet1Subnet5661CC02"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "stream5qa_etl_instance"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash\necho \"[mongodb-org-4.2]\nname=MongoDB Repository\nbaseurl=https://repo.mongodb.org/yum/amazon/2/mongodb-org/4.2/x86_64/\ngpgcheck=1\nenabled=1\ngpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc\"> /etc/yum.repos.d/mongodb-org-4.2.repo\nyum install -y mongodb-org\necho \"# mongod.conf\n\n# for documentation of all options, see:\n#   http://docs.mongodb.org/manual/reference/configuration-options/\n\n# where to write logging data.\nsystemLog:\n  destination: file\n  logAppend: true\n  path: /var/log/mongodb/mongod.log\n\n# Where and how to store data.\nstorage:\n  dbPath: /var/lib/mongo\n  journal:\n    enabled: true\n#  engine:\n#  wiredTiger:\n\n# how the process runs\nprocessManagement:\n  fork: true  # fork and run in background\n  pidFilePath: /var/run/mongodb/mongod.pid  # location of pidfile\n  timeZoneInfo: /usr/share/zoneinfo\n\n# network interfaces\nnet:\n  port: 27017\n  bindIp: 0.0.0.0  # Enter 0.0.0.0,:: to bind to all IPv4 and IPv6 addresses or, alternatively, use the net.bindIpAll setting.\n\n\n#security:\n\n#operationProfiling:\n\n#replication:\n\n#sharding:\n\n## Enterprise-Only Options\n\n#auditLog:\n\n#snmp:\"> /etc/mongod.conf \nservice mongod start\nchkconfig mongod on\n\n"
+    }
+   },
+   "DependsOn": [
+    "myInstance1InstanceRole4A29B931"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "my-app/myInstance1/Resource"
+   }
+  },
+  "ec2IP27045E2E": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": {
+     "Fn::GetAtt": [
+      "myInstance112A675EA",
+      "PublicIp"
+     ]
+    },
+    "Description": "IP Parameter value stored",
+    "Name": "/stream5qa/myapp/ec2ipbucket",
+    "Tier": "Standard"
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/ec2IP/Resource"
+   }
+  },
+  "scriptbucket682FD001": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": {
+     "Ref": "ScriptBucketAAD020DD"
+    },
+    "Description": "S3 ScriptBucket Parameter value stored",
+    "Name": "/stream5qa/myapp/scriptbucket",
+    "Tier": "Standard"
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/scriptbucket/Resource"
+   }
+  },
+  "feedbucket7216FF07": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": {
+     "Ref": "FeedBucket0A59BD93"
+    },
+    "Description": "S3 FeedBucket Parameter value stored",
+    "Name": "/stream5qa/myapp/feedbucket",
+    "Tier": "Standard"
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/feedbucket/Resource"
+   }
+  },
+  "gluejob2E8780CD": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "stream5qa_demoGlueJob",
+    "Description": "GlueJob Parameter value stored",
+    "Name": "/stream5qa/myapp/gluejob",
+    "Tier": "Standard"
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/gluejob/Resource"
+   }
+  },
+  "env28F68B0B": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "stream5qa",
+    "Description": "Environment is stored",
+    "Name": "/env",
+    "Tier": "Standard"
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/env/Resource"
+   }
+  },
+  "dbECC37780": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "MONGODB",
+    "Description": "Database is stored",
+    "Name": "/database",
+    "Tier": "Standard"
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/db/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12RUU8CMQzHP4vvYypE35EoQROzgOHV9EaBym0jWye5XO67u908j/jUX//ttv/aqXx8kHc3cAkTvTtNaqpku2HQJ5GkzzbMZPsU9QlZLPa2UCdqMNUOZJskhd5QCOSseIlWc4YkD9wJAiPbtasxy31Uribd5HSklQ0MVqPybk81duJQR5Sp8OoqgXoq2+1Z58atWggVq3RuEytbbI20dpHxA6ryWtFHbR6C0wSDx76Q4XmlcngHXgLjBRqhPH0nHC9eWUafeGgoTn6zOaeBHQ1aFhvU0RM3S+/iuffwX3jDRgF5Mfz4+vedCMHk+XuyBwUeDKZn+0kNSdf11jG46NPhP7juycnC2R2VDaiGj87ezuT9fdr0VyCa+GiZDMp1iT/kiyD8BQIAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Parameters": {
+  "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664ebsC96584B6F00A464EAD1953AFF4B05118Parameter": {
+   "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+   "Default": "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-ebs"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
