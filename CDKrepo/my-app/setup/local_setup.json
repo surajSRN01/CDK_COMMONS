@@ -13,11 +13,11 @@
 	},
 	{
 		"ParameterKey": "script_bucket_name",
-		"ParameterValue": "script-bucket1999"
+		"ParameterValue": "script-bucket2000"
 	},
 	{
 		"ParameterKey": "feed_bucket_name",
-		"ParameterValue": "feed-bucket1999"
+		"ParameterValue": "feed-bucket2000"
 	},
 	{
 		"ParameterKey": "module",

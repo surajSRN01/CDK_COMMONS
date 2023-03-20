@@ -3,7 +3,7 @@
   "ScriptBucketAAD020DD": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
-    "BucketName": "stream5qa-script-bucket1999"
+    "BucketName": "stream5qa-script-bucket2000"
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
@@ -14,7 +14,7 @@
   "FeedBucket0A59BD93": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
-    "BucketName": "stream5qa-feed-bucket1999"
+    "BucketName": "stream5qa-feed-bucket2000"
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
@@ -373,7 +373,10 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "ZipFile": "import boto3\n\nprint('Loading function')\n\ns3 = boto3.client('s3')\nglue = boto3.client('glue')\nssm=boto3.client('ssm')\n\ndef lambda_handler(event, context):\n\n    envParam = ssm.get_parameter(Name='/env', WithDecryption=True)\n    env = envParam['Parameter']['Value']\n\n\n    glueParam = ssm.get_parameter(Name='/'+env +'/myapp/gluejob', WithDecryption=True)\n    gluename = glueParam['Parameter']['Value']\n\n    bucket_name =event['Records'][0]['s3']['bucket']['name']\n    event_key = event['Records'][0]['s3']['object']['key']\n    print(\" lambda triggered for bucket: \"+bucket_name+\" , event_key: \"+event_key)\n    glueJobName= gluename\n    runId = glue.start_job_run(JobName= glueJobName,Arguments={})\n    print(runId)\n    status = glue.get_job_run(JobName= glueJobName, RunId=runId['JobRunId'])\n    print(status)\n    return bucket_name, event_key\n    \n    \n\n\n\n    \n\n    "
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "a6e8bd8b7063452adb6403ff7af98dd7ee7fbf7e31d9df9bb27b3ec2fb774782.zip"
     },
     "Role": {
      "Fn::GetAtt": [
@@ -398,7 +401,10 @@
     "stream5qalambdajobrole7C6F6288"
    ],
    "Metadata": {
-    "aws:cdk:path": "my-app/lambda_func/Resource"
+    "aws:cdk:path": "my-app/lambda_func/Resource",
+    "aws:asset:path": "asset.a6e8bd8b7063452adb6403ff7af98dd7ee7fbf7e31d9df9bb27b3ec2fb774782",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
    }
   },
   "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC": {
@@ -1166,10 +1172,23 @@
     "aws:cdk:path": "my-app/db/Resource"
    }
   },
+  "modulename58CF314C": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "sample-code",
+    "Description": "Module Name is stored",
+    "Name": "/module",
+    "Tier": "Standard"
+   },
+   "Metadata": {
+    "aws:cdk:path": "my-app/module_name/Resource"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12RUU8CMQzHP4vvYypE35EoQROzgOHV9EaBym0jWye5XO67u908j/jUX//ttv/aqXx8kHc3cAkTvTtNaqpku2HQJ5GkzzbMZPsU9QlZLPa2UCdqMNUOZJskhd5QCOSseIlWc4YkD9wJAiPbtasxy31Uribd5HSklQ0MVqPybk81duJQR5Sp8OoqgXoq2+1Z58atWggVq3RuEytbbI20dpHxA6ryWtFHbR6C0wSDx76Q4XmlcngHXgLjBRqhPH0nHC9eWUafeGgoTn6zOaeBHQ1aFhvU0RM3S+/iuffwX3jDRgF5Mfz4+vedCMHk+XuyBwUeDKZn+0kNSdf11jG46NPhP7juycnC2R2VDaiGj87ezuT9fdr0VyCa+GiZDMp1iT/kiyD8BQIAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/11STW/CMAz9LbuHbIC2O6ANsUlTBBNX5AYDHk2C8jFUVf3vc1q6bjv5+Tm2n54zkU+P8uEOrmGk9+dRSYWsNxH0WTC1q8NU1vOkzxjF4mBvqAtzCNiIEkyxB1lzVaE3FAI5K16S1TEDpnvcCAIj67UrMdNtVK4kXeV0QCsbIliNyrsDlbziWCaUXHh1hQjTHYSAMchZDgL1RNbbi86NW7UQKhU8Z5MK2yke0NqliB9QdNs7fuB4mtMEvea2kMHzSuXwDnEJEa9QCeXpi+EweGUjesb9g07JLZtF9vJk0EaxQZ08xWrpXbq0Gv4Tb1gpIC96B3670YgQTD6NJ3tU4MEgr22d65OmaaVjcMlz8w9oneKbHrnzT0NOFs7uqTuPquLJ2fupHI/5R3wGopFPNpJBue7iNwdZOGItAgAA"
    },
    "Metadata": {
     "aws:cdk:path": "my-app/CDKMetadata/Default"

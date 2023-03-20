@@ -18,7 +18,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                   "aws:cdk:cloudformation:props": {
-                    "bucketName": "stream5qa-script-bucket1999"
+                    "bucketName": "stream5qa-script-bucket2000"
                   }
                 },
                 "constructInfo": {
@@ -42,7 +42,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                   "aws:cdk:cloudformation:props": {
-                    "bucketName": "stream5qa-feed-bucket1999"
+                    "bucketName": "stream5qa-feed-bucket2000"
                   }
                 },
                 "constructInfo": {
@@ -475,6 +475,32 @@
             "id": "lambda_func",
             "path": "my-app/lambda_func",
             "children": {
+              "Code": {
+                "id": "Code",
+                "path": "my-app/lambda_func/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "my-app/lambda_func/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.65.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "my-app/lambda_func/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.65.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.65.0"
+                }
+              },
               "Resource": {
                 "id": "Resource",
                 "path": "my-app/lambda_func/Resource",
@@ -482,7 +508,10 @@
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
                     "code": {
-                      "zipFile": "import boto3\n\nprint('Loading function')\n\ns3 = boto3.client('s3')\nglue = boto3.client('glue')\nssm=boto3.client('ssm')\n\ndef lambda_handler(event, context):\n\n    envParam = ssm.get_parameter(Name='/env', WithDecryption=True)\n    env = envParam['Parameter']['Value']\n\n\n    glueParam = ssm.get_parameter(Name='/'+env +'/myapp/gluejob', WithDecryption=True)\n    gluename = glueParam['Parameter']['Value']\n\n    bucket_name =event['Records'][0]['s3']['bucket']['name']\n    event_key = event['Records'][0]['s3']['object']['key']\n    print(\" lambda triggered for bucket: \"+bucket_name+\" , event_key: \"+event_key)\n    glueJobName= gluename\n    runId = glue.start_job_run(JobName= glueJobName,Arguments={})\n    print(runId)\n    status = glue.get_job_run(JobName= glueJobName, RunId=runId['JobRunId'])\n    print(status)\n    return bucket_name, event_key\n    \n    \n\n\n\n    \n\n    "
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "a6e8bd8b7063452adb6403ff7af98dd7ee7fbf7e31d9df9bb27b3ec2fb774782.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -1645,6 +1674,34 @@
                     "value": "MONGODB",
                     "description": "Database is stored",
                     "name": "/database",
+                    "tier": "Standard"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                  "version": "2.65.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+              "version": "2.65.0"
+            }
+          },
+          "module_name": {
+            "id": "module_name",
+            "path": "my-app/module_name",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "my-app/module_name/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                  "aws:cdk:cloudformation:props": {
+                    "type": "String",
+                    "value": "sample-code",
+                    "description": "Module Name is stored",
+                    "name": "/module",
                     "tier": "Standard"
                   }
                 },

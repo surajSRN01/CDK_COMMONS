@@ -17,7 +17,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/404befeb9e4fd2a4018d377d50c5454334579c04b39d45549741af4b72a05020.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a460f3ed73dffabd85b4b441556b3a805a9b5c1dd561ee76bedc4d06c087461f.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -319,6 +319,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "dbECC37780"
+          }
+        ],
+        "/my-app/module_name/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modulename58CF314C"
           }
         ],
         "/my-app/CDKMetadata/Default": [

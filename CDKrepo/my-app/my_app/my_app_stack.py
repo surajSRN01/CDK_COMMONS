@@ -26,7 +26,7 @@ class MyAppStack(Stack):
         roles, env, script_bucket, feed_bucket, module_name, db = setup.read_setup_file()
 
 # ----------------------------------BUCKET-------------------------------------------------------------------
-        s = boto3.client('ssm')
+        
         client = boto3.client('s3')
 
         # create s3 buckets
@@ -35,22 +35,10 @@ class MyAppStack(Stack):
         bucket_feed = s3.Bucket(
             self, "FeedBucket", bucket_name=env + "-" + feed_bucket)
 
-        # getting bucket name using parameter store
-        bucketParam = s.get_parameter(
-            Name='/'+env+'/myapp/scriptbucket', WithDecryption=True)
-        target_name = bucketParam['Parameter']['Value']
+        shutil.make_archive("Cdk_files/lambda/"+module_name,
+                        "zip", "module_file/"+module_name)
 
-        # upload glue script to the s3 bucket
-        with open("Cdk_files/glue/glue_script.py", "rb") as file:
-            client.upload_fileobj(file, target_name, env +
-                                  '/scripts/{}'.format("glue_script.py"))
-
-        # upload zip sample code to s3 bucket
-        shutil.make_archive("module_file/"+module_name,
-                            "zip", "module_file/"+module_name)
-        with open("module_file/"+module_name+".zip", "rb") as zip:
-            client.upload_fileobj(zip, target_name, env +
-                                  '/package/{}'.format(module_name+".zip"))
+        
 
 
 # -------------------------------------------IAM_POLICIES_GLUE-------------------------------------------------------------------------
@@ -127,12 +115,12 @@ class MyAppStack(Stack):
 
 # -------------------------------------READ_DATA_FROM_FILE----------------------------------------------------------
 
-        # read data from the lambda file
-        try:
-            with open("Cdk_files/lambda/s3togluefunc.py", mode="r") as f:
-                s3func_code = f.read()
-        except OSError:
-            print("Unable to read the lambda function file")
+        # # read data from the lambda file
+        # try:
+        #     with open("Cdk_files/lambda/s3togluefunc.py", mode="r") as f:
+        #         s3func_code = f.read()
+        # except OSError:
+        #     print("Unable to read the lambda function file")
 
 
 # ---------------------------------------LAMBDA_FUNCTION---------------------------------------------------------
@@ -143,7 +131,8 @@ class MyAppStack(Stack):
                                        function_name=env + "_etl_func",
                                        runtime=_lambda.Runtime.PYTHON_3_7,
                                        handler="index.lambda_handler",
-                                       code=_lambda.InlineCode(s3func_code),
+                                    #    code=_lambda.InlineCode(s3func_code),
+                                        code = _lambda.Code.from_asset("Cdk_files/lambda"),
                                        timeout=Duration.seconds(60),
                                        environment=dict(
                                            BUCKET=bucket_feed.bucket_name),
@@ -284,3 +273,12 @@ class MyAppStack(Stack):
                                       description='Database is stored',
                                       tier=ssm.ParameterTier.STANDARD
                                       )
+        
+        moduleParam = ssm.StringParameter(self, 'module_name',
+                                      parameter_name='/module',
+                                      string_value=module_name,
+                                      description='Module Name is stored',
+                                      tier=ssm.ParameterTier.STANDARD
+                                      )
+        
+      
