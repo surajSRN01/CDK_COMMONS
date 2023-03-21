@@ -1,0 +1,372 @@
+{
+  "version": "29.0.0",
+  "artifacts": {
+    "commons-cdk.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "commons-cdk.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "commons-cdk": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "commons-cdk.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/22ae51549f0dc23bb4279d3ec06afa6586142a62fe20743447be7fe886c69577.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "commons-cdk.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "commons-cdk.assets"
+      ],
+      "metadata": {
+        "/commons-cdk/ScriptBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ScriptBucketAAD020DD"
+          }
+        ],
+        "/commons-cdk/FeedBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeedBucket0A59BD93"
+          }
+        ],
+        "/commons-cdk/FeedBucket/Notifications/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeedBucketNotificationsFA88D54B"
+          }
+        ],
+        "/commons-cdk/FeedBucket/AllowBucketNotificationsTocommonscdklambdafunc3445D7B8": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeedBucketAllowBucketNotificationsTocommonscdklambdafunc3445D7B81323CF4D"
+          }
+        ],
+        "/commons-cdk/stream5qa-glue-job-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "stream5qagluejobrole1EB76B32"
+          }
+        ],
+        "/commons-cdk/stream5qa-glue-job-role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "stream5qagluejobroleDefaultPolicy03EFB7AE"
+          }
+        ],
+        "/commons-cdk/demoGlueJob": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoGlueJob"
+          }
+        ],
+        "/commons-cdk/stream5qa-lambda-job-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "stream5qalambdajobrole7C6F6288"
+          }
+        ],
+        "/commons-cdk/stream5qa-lambda-job-role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "stream5qalambdajobroleDefaultPolicy1E7784A7"
+          }
+        ],
+        "/commons-cdk/lambda_func/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdafuncCDB7F2B7"
+          }
+        ],
+        "/commons-cdk/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC"
+          }
+        ],
+        "/commons-cdk/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleDefaultPolicy2CF63D36"
+          }
+        ],
+        "/commons-cdk/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691"
+          }
+        ],
+        "/commons-cdk/dynamodbtable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "dynamodbtableCF45FD86"
+            }
+          }
+        ],
+        "/commons-cdk/dynamodbtable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "dynamodbtableCF45FD86"
+          }
+        ],
+        "/commons-cdk/ETLVpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpc7F009061"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet1Subnet5661CC02"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet1RouteTableE01A4258"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet1RouteTableAssociation18125A19"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet1DefaultRouteDD6C016A"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet1EIP8CE4CA35"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet1NATGateway22ABC366"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet2SubnetE31AAE21"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet2RouteTableF8A683C4"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet2RouteTableAssociation427AFF40"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet2DefaultRouteE9B70FC0"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet2EIPAAC76A65"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPublicSubnet2NATGateway57270DEC"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPrivateSubnet1Subnet7EBB6420"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPrivateSubnet1RouteTable83F9E1C5"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPrivateSubnet1RouteTableAssociationAF6F120A"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPrivateSubnet1DefaultRouteB5855AE7"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPrivateSubnet2SubnetB11B56E3"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPrivateSubnet2RouteTable48CCCFF8"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPrivateSubnet2RouteTableAssociation929D881C"
+          }
+        ],
+        "/commons-cdk/ETLVpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcPrivateSubnet2DefaultRoute529EA8CF"
+          }
+        ],
+        "/commons-cdk/ETLVpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcIGW6FB8CB02"
+          }
+        ],
+        "/commons-cdk/ETLVpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ETLVpcVPCGW415F7D0B"
+          }
+        ],
+        "/commons-cdk/web-server-sg/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "webserversgD43E599E"
+          }
+        ],
+        "/commons-cdk/MyCfnKeyPair": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyCfnKeyPair"
+          }
+        ],
+        "/commons-cdk/myInstance1/InstanceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myInstance1InstanceRole4A29B931"
+          }
+        ],
+        "/commons-cdk/myInstance1/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myInstance1InstanceProfileEB976795"
+          }
+        ],
+        "/commons-cdk/myInstance1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myInstance112A675EA"
+          }
+        ],
+        "/commons-cdk/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-ebs:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664ebsC96584B6F00A464EAD1953AFF4B05118Parameter"
+          }
+        ],
+        "/commons-cdk/ec2IP/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ec2IP27045E2E"
+          }
+        ],
+        "/commons-cdk/scriptbucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "scriptbucket682FD001"
+          }
+        ],
+        "/commons-cdk/feedbucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "feedbucket7216FF07"
+          }
+        ],
+        "/commons-cdk/gluejob/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gluejob2E8780CD"
+          }
+        ],
+        "/commons-cdk/env/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "env28F68B0B"
+          }
+        ],
+        "/commons-cdk/module_name/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modulename58CF314C"
+          }
+        ],
+        "/commons-cdk/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/commons-cdk/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/commons-cdk/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/commons-cdk/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "commons-cdk"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

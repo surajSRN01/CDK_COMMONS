@@ -1,0 +1,27 @@
+[
+	{
+		"ParameterKey": "env",
+		"ParameterValue": "stream5qa"
+	},
+	{
+		"ParameterKey": "role_lambda",
+		"ParameterValue": "utilities/roles/role_lambda.json"
+	},
+    {
+		"ParameterKey": "role_glue",
+		"ParameterValue": "utilities/roles/role_glue.json"
+	},
+	{
+		"ParameterKey": "script_bucket_name",
+		"ParameterValue": "script-file-bucket"
+	},
+	{
+		"ParameterKey": "feed_bucket_name",
+		"ParameterValue": "feed-file-bucket"
+	},
+	{
+		"ParameterKey": "module",
+		"ParameterValue": "sample-code"
+	}
+
+]
