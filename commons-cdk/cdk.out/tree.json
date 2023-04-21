@@ -18,7 +18,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                   "aws:cdk:cloudformation:props": {
-                    "bucketName": "stream5qa-script-file-bucket"
+                    "bucketName": "ignite-integration-script-file-bucket-2"
                   }
                 },
                 "constructInfo": {
@@ -42,7 +42,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                   "aws:cdk:cloudformation:props": {
-                    "bucketName": "stream5qa-feed-file-bucket"
+                    "bucketName": "ignite-integration-feed-file-bucket-2"
                   }
                 },
                 "constructInfo": {
@@ -104,13 +104,13 @@
               "version": "2.63.2"
             }
           },
-          "stream5qa-glue-job-role": {
-            "id": "stream5qa-glue-job-role",
-            "path": "commons-cdk/stream5qa-glue-job-role",
+          "ignite-integration-glue-job-role": {
+            "id": "ignite-integration-glue-job-role",
+            "path": "commons-cdk/ignite-integration-glue-job-role",
             "children": {
-              "Importstream5qa-glue-job-role": {
-                "id": "Importstream5qa-glue-job-role",
-                "path": "commons-cdk/stream5qa-glue-job-role/Importstream5qa-glue-job-role",
+              "Importignite-integration-glue-job-role": {
+                "id": "Importignite-integration-glue-job-role",
+                "path": "commons-cdk/ignite-integration-glue-job-role/Importignite-integration-glue-job-role",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.Resource",
                   "version": "2.63.2"
@@ -118,7 +118,7 @@
               },
               "Resource": {
                 "id": "Resource",
-                "path": "commons-cdk/stream5qa-glue-job-role/Resource",
+                "path": "commons-cdk/ignite-integration-glue-job-role/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                   "aws:cdk:cloudformation:props": {
@@ -143,11 +143,11 @@
               },
               "DefaultPolicy": {
                 "id": "DefaultPolicy",
-                "path": "commons-cdk/stream5qa-glue-job-role/DefaultPolicy",
+                "path": "commons-cdk/ignite-integration-glue-job-role/DefaultPolicy",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "commons-cdk/stream5qa-glue-job-role/DefaultPolicy/Resource",
+                    "path": "commons-cdk/ignite-integration-glue-job-role/DefaultPolicy/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                       "aws:cdk:cloudformation:props": {
@@ -261,10 +261,10 @@
                           ],
                           "Version": "2012-10-17"
                         },
-                        "policyName": "stream5qagluejobroleDefaultPolicy03EFB7AE",
+                        "policyName": "igniteintegrationgluejobroleDefaultPolicy05871452",
                         "roles": [
                           {
-                            "Ref": "stream5qagluejobrole1EB76B32"
+                            "Ref": "igniteintegrationgluejobroleC718FD58"
                           }
                         ]
                       }
@@ -303,15 +303,22 @@
                         {
                           "Ref": "ScriptBucketAAD020DD"
                         },
-                        "/stream5qa/scripts/glue_script.py"
+                        "/ignite-integration/scripts/glue_script.py"
                       ]
                     ]
                   }
                 },
                 "role": {
-                  "Ref": "stream5qagluejobrole1EB76B32"
+                  "Ref": "igniteintegrationgluejobroleC718FD58"
                 },
                 "defaultArguments": {
+                  "--BUCKET": "bucket",
+                  "--EVENT_KEY": "key",
+                  "--BRAND": "brand",
+                  "--COUNTRY": "country",
+                  "--TYPE": "type",
+                  "--ENV": "env",
+                  "--DATABASE": "db",
                   "--extra-py-files": {
                     "Fn::Join": [
                       "",
@@ -320,14 +327,14 @@
                         {
                           "Ref": "ScriptBucketAAD020DD"
                         },
-                        "/stream5qa/package/sample-code.zip"
+                        "/ignite-integration/package/sample-code.zip"
                       ]
                     ]
                   }
                 },
                 "glueVersion": "2.0",
                 "maxRetries": 0,
-                "name": "stream5qa_demoGlueJob",
+                "name": "ignite-integration_demoGlueJob",
                 "numberOfWorkers": 10,
                 "workerType": "G.1X"
               }
@@ -337,13 +344,13 @@
               "version": "2.63.2"
             }
           },
-          "stream5qa-lambda-job-role": {
-            "id": "stream5qa-lambda-job-role",
-            "path": "commons-cdk/stream5qa-lambda-job-role",
+          "ignite-integration-lambda-job-role": {
+            "id": "ignite-integration-lambda-job-role",
+            "path": "commons-cdk/ignite-integration-lambda-job-role",
             "children": {
-              "Importstream5qa-lambda-job-role": {
-                "id": "Importstream5qa-lambda-job-role",
-                "path": "commons-cdk/stream5qa-lambda-job-role/Importstream5qa-lambda-job-role",
+              "Importignite-integration-lambda-job-role": {
+                "id": "Importignite-integration-lambda-job-role",
+                "path": "commons-cdk/ignite-integration-lambda-job-role/Importignite-integration-lambda-job-role",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.Resource",
                   "version": "2.63.2"
@@ -351,7 +358,7 @@
               },
               "Resource": {
                 "id": "Resource",
-                "path": "commons-cdk/stream5qa-lambda-job-role/Resource",
+                "path": "commons-cdk/ignite-integration-lambda-job-role/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                   "aws:cdk:cloudformation:props": {
@@ -376,11 +383,11 @@
               },
               "DefaultPolicy": {
                 "id": "DefaultPolicy",
-                "path": "commons-cdk/stream5qa-lambda-job-role/DefaultPolicy",
+                "path": "commons-cdk/ignite-integration-lambda-job-role/DefaultPolicy",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "commons-cdk/stream5qa-lambda-job-role/DefaultPolicy/Resource",
+                    "path": "commons-cdk/ignite-integration-lambda-job-role/DefaultPolicy/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                       "aws:cdk:cloudformation:props": {
@@ -446,10 +453,10 @@
                           ],
                           "Version": "2012-10-17"
                         },
-                        "policyName": "stream5qalambdajobroleDefaultPolicy1E7784A7",
+                        "policyName": "igniteintegrationlambdajobroleDefaultPolicy8D1A8DE4",
                         "roles": [
                           {
-                            "Ref": "stream5qalambdajobrole7C6F6288"
+                            "Ref": "igniteintegrationlambdajobrole91D844A6"
                           }
                         ]
                       }
@@ -511,11 +518,11 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "b91295fef9b19a4fb9dc8051c8baa13afb52b6a848d8a34200eceeabe2670432.zip"
+                      "s3Key": "8e9e047af39c3146f03839bb68d67a5dd6bde727cc0ae2d5014afd9728ac6627.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
-                        "stream5qalambdajobrole7C6F6288",
+                        "igniteintegrationlambdajobrole91D844A6",
                         "Arn"
                       ]
                     },
@@ -526,7 +533,7 @@
                         }
                       }
                     },
-                    "functionName": "stream5qa_etl_func",
+                    "functionName": "ignite-integration_etl_func",
                     "handler": "index.lambda_handler",
                     "runtime": "python3.7",
                     "timeout": 60
@@ -683,7 +690,7 @@
                       "readCapacityUnits": 5,
                       "writeCapacityUnits": 5
                     },
-                    "tableName": "test"
+                    "tableName": "ignite-dynamodb"
                   }
                 },
                 "constructInfo": {
@@ -1409,7 +1416,7 @@
             "attributes": {
               "aws:cdk:cloudformation:type": "AWS::EC2::KeyPair",
               "aws:cdk:cloudformation:props": {
-                "keyName": "stream5qa_etl_key"
+                "keyName": "ignite-integration_etl_key"
               }
             },
             "constructInfo": {
@@ -1454,7 +1461,7 @@
                         "tags": [
                           {
                             "key": "Name",
-                            "value": "stream5qa_etl_instance"
+                            "value": "ignite-integration_etl_instance"
                           }
                         ]
                       }
@@ -1509,7 +1516,7 @@
                       "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664ebsC96584B6F00A464EAD1953AFF4B05118Parameter"
                     },
                     "instanceType": "t2.micro",
-                    "keyName": "stream5qa_etl_key",
+                    "keyName": "ignite-integration_etl_key",
                     "securityGroupIds": [
                       {
                         "Fn::GetAtt": [
@@ -1524,7 +1531,7 @@
                     "tags": [
                       {
                         "key": "Name",
-                        "value": "stream5qa_etl_instance"
+                        "value": "ignite-integration_etl_instance"
                       }
                     ],
                     "userData": {
@@ -1577,7 +1584,7 @@
                       ]
                     },
                     "description": "IP Parameter value stored",
-                    "name": "/stream5qa/myapp/ec2ipbucket",
+                    "name": "/ignite-integration/myapp/ec2ipbucket",
                     "tier": "Standard"
                   }
                 },
@@ -1607,7 +1614,7 @@
                       "Ref": "ScriptBucketAAD020DD"
                     },
                     "description": "S3 ScriptBucket Parameter value stored",
-                    "name": "/stream5qa/myapp/scriptbucket",
+                    "name": "/ignite-integration/myapp/scriptbucket",
                     "tier": "Standard"
                   }
                 },
@@ -1637,7 +1644,7 @@
                       "Ref": "FeedBucket0A59BD93"
                     },
                     "description": "S3 FeedBucket Parameter value stored",
-                    "name": "/stream5qa/myapp/feedbucket",
+                    "name": "/ignite-integration/myapp/feedbucket",
                     "tier": "Standard"
                   }
                 },
@@ -1663,9 +1670,9 @@
                   "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
                   "aws:cdk:cloudformation:props": {
                     "type": "String",
-                    "value": "stream5qa_demoGlueJob",
+                    "value": "ignite-integration_demoGlueJob",
                     "description": "GlueJob Parameter value stored",
-                    "name": "/stream5qa/myapp/gluejob",
+                    "name": "/ignite-integration/myapp/gluejob",
                     "tier": "Standard"
                   }
                 },
@@ -1691,7 +1698,7 @@
                   "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
                   "aws:cdk:cloudformation:props": {
                     "type": "String",
-                    "value": "stream5qa",
+                    "value": "ignite-integration",
                     "description": "Environment is stored",
                     "name": "/env",
                     "tier": "Standard"

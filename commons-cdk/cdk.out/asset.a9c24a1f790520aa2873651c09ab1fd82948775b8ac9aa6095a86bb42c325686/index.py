@@ -48,7 +48,6 @@ def lambda_handler(event, context):
 
     config_file = read_event_config_file(event_key)
     database = extract_db(config_file)
-    
     print("data fetched successfully : "+config_file+" and "+database)
 
     brand, country, type = get_runtime_context(event_key)
@@ -91,9 +90,10 @@ def read_event_config_file(key):
         array = []
         array = json_data[S3_EVENT_CONFIG_FILE_RULES]
         for item in array:
-            # if bool(re.search(item[PATTERN], key)) == True:
-            config_file = item[CONFIG_FILE]
-            return config_file
+            if bool(re.search(item[PATTERN], key)) == True:
+                config_file = item[CONFIG_FILE]
+
+                return config_file
 
 
 def extract_db(config_file):

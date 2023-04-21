@@ -17,7 +17,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/22ae51549f0dc23bb4279d3ec06afa6586142a62fe20743447be7fe886c69577.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/189c5f31955399543dc4453df3d1f73174412ac77afc0b1b7287473ecc6e03ef.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -57,16 +57,16 @@
             "data": "FeedBucketAllowBucketNotificationsTocommonscdklambdafunc3445D7B81323CF4D"
           }
         ],
-        "/commons-cdk/stream5qa-glue-job-role/Resource": [
+        "/commons-cdk/ignite-integration-glue-job-role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stream5qagluejobrole1EB76B32"
+            "data": "igniteintegrationgluejobroleC718FD58"
           }
         ],
-        "/commons-cdk/stream5qa-glue-job-role/DefaultPolicy/Resource": [
+        "/commons-cdk/ignite-integration-glue-job-role/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stream5qagluejobroleDefaultPolicy03EFB7AE"
+            "data": "igniteintegrationgluejobroleDefaultPolicy05871452"
           }
         ],
         "/commons-cdk/demoGlueJob": [
@@ -75,16 +75,16 @@
             "data": "demoGlueJob"
           }
         ],
-        "/commons-cdk/stream5qa-lambda-job-role/Resource": [
+        "/commons-cdk/ignite-integration-lambda-job-role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stream5qalambdajobrole7C6F6288"
+            "data": "igniteintegrationlambdajobrole91D844A6"
           }
         ],
-        "/commons-cdk/stream5qa-lambda-job-role/DefaultPolicy/Resource": [
+        "/commons-cdk/ignite-integration-lambda-job-role/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stream5qalambdajobroleDefaultPolicy1E7784A7"
+            "data": "igniteintegrationlambdajobroleDefaultPolicy8D1A8DE4"
           }
         ],
         "/commons-cdk/lambda_func/Resource": [

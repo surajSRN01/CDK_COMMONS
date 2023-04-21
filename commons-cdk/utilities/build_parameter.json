@@ -1,7 +1,7 @@
 [
 	{
 		"ParameterKey": "env",
-		"ParameterValue": "stream5qa"
+		"ParameterValue": "ignite-integration"
 	},
 	{
 		"ParameterKey": "role_lambda",
@@ -13,11 +13,11 @@
 	},
 	{
 		"ParameterKey": "script_bucket_name",
-		"ParameterValue": "script-file-bucket"
+		"ParameterValue": "script-file-bucket-2"
 	},
 	{
 		"ParameterKey": "feed_bucket_name",
-		"ParameterValue": "feed-file-bucket"
+		"ParameterValue": "feed-file-bucket-2"
 	},
 	{
 		"ParameterKey": "module",
