@@ -1,0 +1,99 @@
+{
+    "parserType": "txt",
+    "separator": ",",
+    "sheets": [
+      {
+        "priority": 0,
+        "skip": 1,
+        "fields": [
+          {
+            "target": "name",
+            "source": {
+              "index": "0"
+            },
+            "validations": {
+              "mandatory": true
+            }
+          },
+          {
+            "target": "comment",
+            "source": {
+              "index": "1"
+            },
+            "validations": {
+              "mandatory": true
+            }
+          },
+          {
+            "target": "timeStamp",
+            "source": {
+              "index": "2"
+            },
+            "validations": {
+              "mandatory": false
+            }
+          },
+          {
+            "target": "likes",
+            "source": {
+              "index": "3"
+            }
+          },
+          {
+            "target": "replyCount",
+            "source": {
+              "index": "4"
+            }
+          },
+          {
+            "target": "date",
+            "source": {
+              "index": "5"
+            }
+          },
+          {
+            "target": "time",
+            "source": {
+              "index": "6"
+            }
+          },
+          {
+            "target": "year",
+            "source": {
+              "index": "7"
+            }
+          },
+          {
+            "target": "month",
+            "source": {
+              "index": "8"
+            }
+          },
+          {
+            "target": "day",
+            "source": {
+              "index": "9"
+            }
+          },
+          {
+            "target": "hour",
+            "source": {
+              "index": "10"
+            }
+          },
+          {
+            "target": "session",
+            "source": {
+              "index": "11"
+            }
+          },
+          {
+            "target": "clean_text",
+            "source": {
+              "index": "12"
+            }
+          }
+        ]
+      }
+    ]
+  }

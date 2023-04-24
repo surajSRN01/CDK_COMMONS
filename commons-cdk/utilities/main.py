@@ -22,7 +22,8 @@ class MyAppStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        roles, env, script_bucket, feed_bucket, module_name = MyAppStack.read_setup_file()
+        roles, env, script_bucket, feed_bucket= MyAppStack.read_setup_file()
+        modulename = None
 
 # ----------------------------------BUCKET-------------------------------------------------------------------
 
@@ -35,8 +36,7 @@ class MyAppStack(Stack):
             self, "FeedBucket", bucket_name=env + "-" + feed_bucket)
 
         # client.put_object(Bucket = bucket_script,)
-        shutil.make_archive("lambda/resources/"+module_name,
-                            "zip", "lambda/"+module_name)
+        
 
 
 # -------------------------------------------IAM_POLICIES_GLUE-------------------------------------------------------------------------
@@ -67,31 +67,43 @@ class MyAppStack(Stack):
 
 
 # ---------------------------------------GLUE_JOB----------------------------------------------------------------
-        f
-        # creating glue job
-        glue_job = _glue.CfnJob(self,
-                                'demoGlueJob',
+        path = 'lambda/resources/config'
+        for filename in os.listdir(path):
+            if(filename=="s3-event-config-rule.json"):
+                continue
+            else:
+                f = os.path.join(path,filename)
+                with open(f, mode="r") as fi:
+                    file = json.load(fi)
+                    modulename = file["job_name"]
+                # creating glue job
+                glue_job = _glue.CfnJob(self,
+                                modulename,
                                 role=glue_job_role.role_name,
                                 glue_version="3.0",
-                                name=env + "_demoGlueJob",
+                                name=env + "_"+modulename,
                                 max_retries=0,
                                 number_of_workers=10,
 
                                 worker_type="G.1X",
                                 default_arguments={
-                                    '--extra-py-files':  "s3://"+bucket_script.bucket_name+"/"+env+"/package/"+module_name+".zip" },
+                                    '--extra-py-files':  "s3://"+bucket_script.bucket_name+"/"+env+"/package/"+modulename+".zip" },
                                 command=_glue.CfnJob.JobCommandProperty(
                                     name='glueetl',
                                     
                                     python_version=os.getenv(
                                         'PYTHON_VERSION', "3"),
                                     script_location=f"s3://"+bucket_script.bucket_name +
-                                    "/"+env+"/scripts/glue_script.py"
+                                    "/"+env+"/scripts/main.py"
                                 )
                                 )
-
+# -------------------------------------------Zipping the module folder--------------------------------------------------------------------------------
+        
+        shutil.make_archive("lambda/resources/"+modulename,
+                            "zip", "lambda/resources/"+modulename)
+        
 # -------------------------------------------IAM_POLICIES_LAMBDA-------------------------------------------------------------------------
-
+        
         # reading the roles from roles_policies file
         with open(roles[0], mode="r") as f:
             lambda_policy = json.load(f)
@@ -257,7 +269,7 @@ class MyAppStack(Stack):
 
         moduleParam = ssm.StringParameter(self, 'module_name',
                                           parameter_name='/module',
-                                          string_value=module_name,
+                                          string_value=modulename,
                                           description='Module Name is stored',
                                           tier=ssm.ParameterTier.STANDARD
                                           )
@@ -285,9 +297,9 @@ class MyAppStack(Stack):
                     # [roles_policies/role_lambda.json, roles_policies/role_glue.json,sample-code]
                     script_bucket = roles.pop(2)
                     feed_bucket = roles.pop(2)
-                    module = roles.pop(2)
                     
-                    return roles, env, script_bucket, feed_bucket, module
+                    
+                    return roles, env, script_bucket, feed_bucket
 
             else:
                 print("File is Empty")

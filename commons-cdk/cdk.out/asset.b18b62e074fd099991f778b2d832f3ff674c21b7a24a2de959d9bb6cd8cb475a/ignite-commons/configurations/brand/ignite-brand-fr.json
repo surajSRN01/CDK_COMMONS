@@ -1,0 +1,31 @@
+{
+    "configurations": [
+        {
+            "id": "1",
+            "feedPathPrefix": "brand/fr/ignite/upload/,brand/fr/_darkignite/upload/",
+            "brands": [
+                "brand"
+            ],
+            "owner": "brand",
+            "country": "fr",
+            "name": "Car",
+            "lifecycles": [
+                {
+                    "clazz": "com.ignite.model.car.Car",
+                    "query": "{}"
+                }
+            ],
+            "requiredFeeds": [
+                {
+                    "filePattern": "ignite_cars_[a-zA-Z]+_[a-zA-Z]{2}_.*\\.xlsx",
+                    "parserConfigurations": [
+                        {
+                            "type": "com.ignite.model.car.Car",
+                            "config": "ignite_car.json"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

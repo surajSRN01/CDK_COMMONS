@@ -1,0 +1,7 @@
+{
+    "job_name": "ignite-finance",
+    "configurations": [{
+            "database": "MONGODB"
+        }
+    ]
+}

@@ -1,0 +1,73 @@
+{
+	"parserType": "xml",
+	"separator": ",",
+	"sheets": [
+		{
+			"priority": 0,
+			"index": "catalog.book",
+			"skip": 0,
+			"fields": [
+				{
+					"target": "author",
+					"source": {
+						"index": "author"
+					},
+					"validations": {
+						"mandatory": true
+					},
+					"processing": {
+						"removeEmpty": true
+					}
+				},
+				{
+					"target": "title",
+					"source": {
+						"index": "title"
+					},
+					"validations": {
+						"mandatory": true
+					},
+					"processing": {
+						"removeEmpty": true
+					}
+				},
+				{
+					"target": "genre",
+					"source": {
+						"index": "genre"
+					}
+				},
+				{
+					"target": "price",
+					"source": {
+						"index": "price"
+					}
+				},
+				{
+					"target": "publish_date",
+					"source": {
+						"index": "publish_date"
+					},
+					"validations": {
+						"mandatory": true
+					},
+					"processing": {
+						"removeEmpty": true
+					}
+				},
+				{
+					"target": "description",
+					"source": {
+						"index": "description"
+					},
+					"validations": {
+						"mandatory": true
+					},
+					"processing": {
+						"removeEmpty": true
+					}
+				}
+			]
+		}
+	]
+}
