@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import main_process_flow as flow
 from awsglue.transforms import *
 import boto3
@@ -19,3 +20,9 @@ ssm = boto3.client('ssm')
 print("request context : ",args)
 # flow.main(args["BUCKET"],args["DATABASE"])
 job.commit()
+=======
+import main as flow
+
+print("inside the glue script")
+flow.main()
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e

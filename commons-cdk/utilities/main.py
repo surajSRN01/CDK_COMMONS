@@ -49,9 +49,9 @@ class MyAppStack(Stack):
         
         shutil.make_archive("lambda/resources/"+module_name,"zip", "lambda/"+module_name)
 
-        
-        log_utils.print_info_logs("bucket creation done in ")
-        log_utils.print_info_logs(MyAppStack.getTime(start))
+        # client.put_object(Bucket = bucket_script,)
+        shutil.make_archive("lambda/resources/"+module_name,
+                            "zip", "lambda/"+module_name)
 
 
 # -------------------------------------------IAM_POLICIES_GLUE-------------------------------------------------------------------------
@@ -80,20 +80,19 @@ class MyAppStack(Stack):
         # adding policy statement to glue role
         glue_job_role.add_to_policy(policy_statement)
 
-        log_utils.print_info_logs("roles for glue is created in ")
-        log_utils.print_info_logs(MyAppStack.getTime(start))
 
 # ---------------------------------------GLUE_JOB----------------------------------------------------------------
-
+        f
         # creating glue job
         glue_job = _glue.CfnJob(self,
                                 'demoGlueJob',
                                
                                 role=glue_job_role.role_name,
-                                glue_version="2.0",
+                                glue_version="3.0",
                                 name=env + "_demoGlueJob",
                                 max_retries=0,
                                 number_of_workers=10,
+
                                 worker_type="G.1X",
                                 
                                 default_arguments={                                                          
@@ -107,14 +106,14 @@ class MyAppStack(Stack):
                                     '--extra-py-files':  "s3://"+bucket_script.bucket_name+"/"+env+"/package/"+module_name+".zip" },                                  
                                 command=_glue.CfnJob.JobCommandProperty(
                                     name='glueetl',
+                                    
                                     python_version=os.getenv(
                                         'PYTHON_VERSION', "3"),
                                     script_location=f"s3://"+bucket_script.bucket_name + "/"+env+"/scripts/glue_script.py"
                                 )
                                 )
         
-        log_utils.print_info_logs("glue job created in ")
-        log_utils.print_info_logs(MyAppStack.getTime(start))
+       
 
 # -------------------------------------------IAM_POLICIES_LAMBDA-------------------------------------------------------------------------
 
@@ -139,8 +138,6 @@ class MyAppStack(Stack):
         # adding policy statement to lambda role
         lambda_job_role.add_to_policy(policy_statement1)
 
-        log_utils.print_info_logs("roles for lambda is done in ")
-        log_utils.print_info_logs(MyAppStack.getTime(start))
 
 # ---------------------------------------LAMBDA_FUNCTION---------------------------------------------------------
 
@@ -157,8 +154,7 @@ class MyAppStack(Stack):
                                            BUCKET=bucket_feed.bucket_name),
                                        role=lambda_job_role
                                        )
-        log_utils.print_info_logs("lambda created in ")
-        log_utils.print_info_logs(MyAppStack.getTime(start))
+        
 
 # --------------------------------------ADD_TRIGGER_TO_S3_BUCKET----------------------------------------------
 
@@ -169,8 +165,6 @@ class MyAppStack(Stack):
             notify.LambdaDestination(lambda_func)
         )
 
-        log_utils.print_info_logs("trigger is added on s3 bucket in ")
-        log_utils.print_info_logs(MyAppStack.getTime(start))
 
 # --------------------------------------DYNAMODB----------------------------------------------------------
 
@@ -183,10 +177,6 @@ class MyAppStack(Stack):
                 type=dynamodb.AttributeType.NUMBER
             )
         )
-
-        log_utils.print_info_logs("dynamo database created in ")
-        log_utils.print_info_logs(MyAppStack.getTime(start))
-
 
 # ---------------------------------------EC2_SERVICES----------------------------------------------------------------
 
@@ -235,9 +225,6 @@ class MyAppStack(Stack):
         with open("scripts/script.sh", mode="r") as f:
             user_data = f.read()
 
-        log_utils.print_info_logs("Requirements for EC2 instances are created in ")
-        log_utils.print_info_logs(MyAppStack.getTime(start))
-
 # ------------------------------------LAUNCH_EC2-----------------------------------------------------------
 
         # creating ec2 instance
@@ -256,12 +243,6 @@ class MyAppStack(Stack):
             ),
             user_data=ec2.UserData.custom(user_data)
         )
-
-        log_utils.print_info_logs("instance created in ")
-        log_utils.print_info_logs(MyAppStack.getTime(start))
-
-        
-
 
 # ----------------------------------PARAMETER VALUE----------------------------------------------------
 
@@ -308,13 +289,7 @@ class MyAppStack(Stack):
                                           tier=ssm.ParameterTier.STANDARD
                                           )
         
-        log_utils.print_info_logs("values are added in parameter store in ")
-        log_utils.print_info_logs(MyAppStack.getTime(start))
-
-        log_utils.print_info_logs("deployement is done")
-        
-        
-
+      
     def read_setup_file():
 
         LOCAL_CONFIG_FILE = "utilities/build_parameter.json"

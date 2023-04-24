@@ -1,7 +1,7 @@
 [
 	{
 		"ParameterKey": "env",
-		"ParameterValue": "ignite-integration"
+		"ParameterValue": "dev"
 	},
 	{
 		"ParameterKey": "role_lambda",
@@ -13,15 +13,15 @@
 	},
 	{
 		"ParameterKey": "script_bucket_name",
-		"ParameterValue": "script-file-bucket-2"
+		"ParameterValue": "script-file-bucket1"
 	},
 	{
 		"ParameterKey": "feed_bucket_name",
-		"ParameterValue": "feed-file-bucket-2"
+		"ParameterValue": "feed-file-bucket1"
 	},
 	{
 		"ParameterKey": "module",
-		"ParameterValue": "sample-code"
+		"ParameterValue": "ignite-commons"
 	}
 
 ]
