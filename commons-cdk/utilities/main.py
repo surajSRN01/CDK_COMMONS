@@ -4,8 +4,6 @@ import time
 import json
 import boto3
 import shutil
-import utilities.log_utils as log_utils
-from utilities.feed_runtime_context import FeedRuntimeContext
 from aws_cdk import (
     aws_lambda as _lambda,
     Duration,
@@ -18,21 +16,12 @@ from aws_cdk import (
     aws_ec2 as ec2,
     aws_dynamodb as dynamodb
 )
-# Logging
-logger = log_utils.get_logger()
-feed_runtime_context = FeedRuntimeContext.get_instance()
-feed_runtime_context.logger = logger
 
 class MyAppStack(Stack):
-    def getTime(start):
-        time_taken=time.time()-start
-        start=time.time()
-        return time_taken
-
+  
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-        start = time.time()
-        log_utils.print_info_logs("deployement has started")
+        
         roles, env, script_bucket, feed_bucket, module_name = MyAppStack.read_setup_file()
 
 # ----------------------------------BUCKET-------------------------------------------------------------------
@@ -45,7 +34,6 @@ class MyAppStack(Stack):
         bucket_feed = s3.Bucket(
             self, "FeedBucket", bucket_name=env + "-" + feed_bucket)
         bucket_name=env + "-" + script_bucket
-        
         
         shutil.make_archive("lambda/resources/"+module_name,"zip", "lambda/"+module_name)
 

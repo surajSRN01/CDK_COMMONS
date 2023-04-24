@@ -47,28 +47,6 @@ def lambda_handler(event, context):
     event_key = event['Records'][0]['s3']['object']['key']
     print(" lambda triggered for bucket: " +
           bucket_name+" , event_key: "+event_key)
-<<<<<<< HEAD
-
-    config_file = read_event_config_file(event_key)
-    database = extract_db(config_file)
-    
-    print("data fetched successfully : "+config_file+" and "+database)
-
-    brand, country, type = get_runtime_context(event_key)
-
-    runId = glue.start_job_run(JobName=glueJobName, Arguments={
-        '--BUCKET': bucket_name,
-        '--EVENT_KEY': event_key,
-        '--BRAND': brand,
-        '--COUNTRY': country,
-        '--FEEDFILES_LIST': "",
-        "--TYPE": type,
-        '--ENV': env,
-        '--DATABASE': database})
-    print(runId)
-    status = glue.get_job_run(JobName=glueJobName, RunId=runId['JobRunId'])
-    print(status)
-=======
 
     config_file = read_event_config_file(event_key)
     if config_file is not None:
@@ -91,7 +69,6 @@ def lambda_handler(event, context):
         print(runId)
         status = glue.get_job_run(JobName=glueJobName, RunId=runId['JobRunId'])
         print(status)
->>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
     return bucket_name, event_key
 
 
@@ -118,15 +95,10 @@ def read_event_config_file(key):
         array = []
         array = json_data[S3_EVENT_CONFIG_FILE_RULES]
         for item in array:
-<<<<<<< HEAD
-            # if bool(re.search(item[PATTERN], key)) == True:
-            config_file = item[CONFIG_FILE]
-=======
             if bool(re.compile(item[PATTERN]).match(key)) == True:
                 config_file = item[CONFIG_FILE]
             else:
                 config_file = None
->>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
             return config_file
 
 

@@ -62,7 +62,6 @@ feed_runtime_context.glueContext = glueContext
 
 def main() :
     try:
-        print("Feed X corelationId: ")
         log_utils.add_info_logs(feed_runtime_context.x_correlation_id)
         date_time = datetime.now().strftime(const.S3_FILE_DATEPATTERN)[:-3]
         const.CURRENT_TIMESTAMP = date_time
