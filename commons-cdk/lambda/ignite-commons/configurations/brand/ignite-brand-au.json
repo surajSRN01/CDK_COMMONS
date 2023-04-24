@@ -1,0 +1,47 @@
+{
+    "configurations": [
+        {
+            "id": "1",
+            "feedPathPrefix": "brand/au/ignite/upload/,brand/au/_darkignite/upload/",
+            "brands": [
+                "brand"
+            ],
+            "owner": "brand",
+            "country": "au",
+            "name": "Person",
+            "lifecycles": [
+                {
+                    "clazz": "com.ignite.model.person.Person",
+                    "query": "{}"
+                },
+                {
+                    "clazz": "com.ignite.model.occupation.Occupation",
+                    "query": "{}"
+                },
+                {
+                    "clazz": "com.ignite.model.dependent.Dependent",
+                    "query": "{}"
+                }
+            ],
+            "requiredFeeds": [
+                {
+                    "filePattern": "ignite_[a-zA-Z]+_[a-zA-Z]{2}_.*\\.xlsx",
+                    "parserConfigurations": [
+                        {
+                            "type": "com.ignite.model.person.Person",
+                            "config": "ignite_person.json"
+                        },
+                        {
+                            "type": "com.ignite.model.occupation.Occupation",
+                            "config": "ignite_occupation.json"
+                        },
+                        {
+                            "type": "com.ignite.model.dependent.Dependent",
+                            "config": "ignite_dependent.json"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

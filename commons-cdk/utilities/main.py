@@ -34,6 +34,7 @@ class MyAppStack(Stack):
         bucket_feed = s3.Bucket(
             self, "FeedBucket", bucket_name=env + "-" + feed_bucket)
 
+        # client.put_object(Bucket = bucket_script,)
         shutil.make_archive("lambda/resources/"+module_name,
                             "zip", "lambda/"+module_name)
 
@@ -66,20 +67,22 @@ class MyAppStack(Stack):
 
 
 # ---------------------------------------GLUE_JOB----------------------------------------------------------------
-
+        f
         # creating glue job
         glue_job = _glue.CfnJob(self,
                                 'demoGlueJob',
                                 role=glue_job_role.role_name,
-                                glue_version="2.0",
+                                glue_version="3.0",
                                 name=env + "_demoGlueJob",
                                 max_retries=0,
                                 number_of_workers=10,
+
                                 worker_type="G.1X",
                                 default_arguments={
                                     '--extra-py-files':  "s3://"+bucket_script.bucket_name+"/"+env+"/package/"+module_name+".zip" },
                                 command=_glue.CfnJob.JobCommandProperty(
                                     name='glueetl',
+                                    
                                     python_version=os.getenv(
                                         'PYTHON_VERSION', "3"),
                                     script_location=f"s3://"+bucket_script.bucket_name +

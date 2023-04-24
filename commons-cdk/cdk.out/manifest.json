@@ -1,5 +1,5 @@
 {
-  "version": "29.0.0",
+  "version": "30.0.0",
   "artifacts": {
     "commons-cdk.assets": {
       "type": "cdk:asset-manifest",
@@ -17,7 +17,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/22ae51549f0dc23bb4279d3ec06afa6586142a62fe20743447be7fe886c69577.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a6ef7bc49dea4e58dcc3cafaffe25a1d51c8cd59050b93f8c03389bef547a67f.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -57,16 +57,16 @@
             "data": "FeedBucketAllowBucketNotificationsTocommonscdklambdafunc3445D7B81323CF4D"
           }
         ],
-        "/commons-cdk/stream5qa-glue-job-role/Resource": [
+        "/commons-cdk/dev-glue-job-role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stream5qagluejobrole1EB76B32"
+            "data": "devgluejobroleA4E3D5A6"
           }
         ],
-        "/commons-cdk/stream5qa-glue-job-role/DefaultPolicy/Resource": [
+        "/commons-cdk/dev-glue-job-role/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stream5qagluejobroleDefaultPolicy03EFB7AE"
+            "data": "devgluejobroleDefaultPolicyFA85FB3A"
           }
         ],
         "/commons-cdk/demoGlueJob": [
@@ -75,16 +75,16 @@
             "data": "demoGlueJob"
           }
         ],
-        "/commons-cdk/stream5qa-lambda-job-role/Resource": [
+        "/commons-cdk/dev-lambda-job-role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stream5qalambdajobrole7C6F6288"
+            "data": "devlambdajobroleABFC8A29"
           }
         ],
-        "/commons-cdk/stream5qa-lambda-job-role/DefaultPolicy/Resource": [
+        "/commons-cdk/dev-lambda-job-role/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stream5qalambdajobroleDefaultPolicy1E7784A7"
+            "data": "devlambdajobroleDefaultPolicy95AD9B77"
           }
         ],
         "/commons-cdk/lambda_func/Resource": [

@@ -3,7 +3,7 @@
   "ScriptBucketAAD020DD": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
-    "BucketName": "stream5qa-script-file-bucket"
+    "BucketName": "dev-script-file-bucket1"
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
@@ -14,7 +14,7 @@
   "FeedBucket0A59BD93": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
-    "BucketName": "stream5qa-feed-file-bucket"
+    "BucketName": "dev-feed-file-bucket1"
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
@@ -83,7 +83,7 @@
     "aws:cdk:path": "commons-cdk/FeedBucket/AllowBucketNotificationsTocommonscdklambdafunc3445D7B8"
    }
   },
-  "stream5qagluejobrole1EB76B32": {
+  "devgluejobroleA4E3D5A6": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -100,10 +100,10 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "commons-cdk/stream5qa-glue-job-role/Resource"
+    "aws:cdk:path": "commons-cdk/dev-glue-job-role/Resource"
    }
   },
-  "stream5qagluejobroleDefaultPolicy03EFB7AE": {
+  "devgluejobroleDefaultPolicyFA85FB3A": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -216,15 +216,15 @@
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "stream5qagluejobroleDefaultPolicy03EFB7AE",
+    "PolicyName": "devgluejobroleDefaultPolicyFA85FB3A",
     "Roles": [
      {
-      "Ref": "stream5qagluejobrole1EB76B32"
+      "Ref": "devgluejobroleA4E3D5A6"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "commons-cdk/stream5qa-glue-job-role/DefaultPolicy/Resource"
+    "aws:cdk:path": "commons-cdk/dev-glue-job-role/DefaultPolicy/Resource"
    }
   },
   "demoGlueJob": {
@@ -241,13 +241,13 @@
         {
          "Ref": "ScriptBucketAAD020DD"
         },
-        "/stream5qa/scripts/glue_script.py"
+        "/dev/scripts/glue_script.py"
        ]
       ]
      }
     },
     "Role": {
-     "Ref": "stream5qagluejobrole1EB76B32"
+     "Ref": "devgluejobroleA4E3D5A6"
     },
     "DefaultArguments": {
      "--extra-py-files": {
@@ -258,14 +258,14 @@
         {
          "Ref": "ScriptBucketAAD020DD"
         },
-        "/stream5qa/package/sample-code.zip"
+        "/dev/package/ignite-commons.zip"
        ]
       ]
      }
     },
-    "GlueVersion": "2.0",
+    "GlueVersion": "3.0",
     "MaxRetries": 0,
-    "Name": "stream5qa_demoGlueJob",
+    "Name": "dev_demoGlueJob",
     "NumberOfWorkers": 10,
     "WorkerType": "G.1X"
    },
@@ -273,7 +273,7 @@
     "aws:cdk:path": "commons-cdk/demoGlueJob"
    }
   },
-  "stream5qalambdajobrole7C6F6288": {
+  "devlambdajobroleABFC8A29": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -290,10 +290,10 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "commons-cdk/stream5qa-lambda-job-role/Resource"
+    "aws:cdk:path": "commons-cdk/dev-lambda-job-role/Resource"
    }
   },
-  "stream5qalambdajobroleDefaultPolicy1E7784A7": {
+  "devlambdajobroleDefaultPolicy95AD9B77": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -358,15 +358,15 @@
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "stream5qalambdajobroleDefaultPolicy1E7784A7",
+    "PolicyName": "devlambdajobroleDefaultPolicy95AD9B77",
     "Roles": [
      {
-      "Ref": "stream5qalambdajobrole7C6F6288"
+      "Ref": "devlambdajobroleABFC8A29"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "commons-cdk/stream5qa-lambda-job-role/DefaultPolicy/Resource"
+    "aws:cdk:path": "commons-cdk/dev-lambda-job-role/DefaultPolicy/Resource"
    }
   },
   "lambdafuncCDB7F2B7": {
@@ -376,11 +376,11 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "b91295fef9b19a4fb9dc8051c8baa13afb52b6a848d8a34200eceeabe2670432.zip"
+     "S3Key": "6183769bd203dfcb0446c623358394a470293eac1761389bfc4a4191657038b2.zip"
     },
     "Role": {
      "Fn::GetAtt": [
-      "stream5qalambdajobrole7C6F6288",
+      "devlambdajobroleABFC8A29",
       "Arn"
      ]
     },
@@ -391,18 +391,18 @@
       }
      }
     },
-    "FunctionName": "stream5qa_etl_func",
+    "FunctionName": "dev_etl_func",
     "Handler": "index.lambda_handler",
     "Runtime": "python3.7",
     "Timeout": 60
    },
    "DependsOn": [
-    "stream5qalambdajobroleDefaultPolicy1E7784A7",
-    "stream5qalambdajobrole7C6F6288"
+    "devlambdajobroleDefaultPolicy95AD9B77",
+    "devlambdajobroleABFC8A29"
    ],
    "Metadata": {
     "aws:cdk:path": "commons-cdk/lambda_func/Resource",
-    "aws:asset:path": "asset.b91295fef9b19a4fb9dc8051c8baa13afb52b6a848d8a34200eceeabe2670432",
+    "aws:asset:path": "asset.6183769bd203dfcb0446c623358394a470293eac1761389bfc4a4191657038b2",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -1020,7 +1020,7 @@
   "MyCfnKeyPair": {
    "Type": "AWS::EC2::KeyPair",
    "Properties": {
-    "KeyName": "stream5qa_etl_key"
+    "KeyName": "dev_etl_key"
    },
    "Metadata": {
     "aws:cdk:path": "commons-cdk/MyCfnKeyPair"
@@ -1044,7 +1044,7 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "stream5qa_etl_instance"
+      "Value": "dev_etl_instance"
      }
     ]
    },
@@ -1083,7 +1083,7 @@
      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664ebsC96584B6F00A464EAD1953AFF4B05118Parameter"
     },
     "InstanceType": "t2.micro",
-    "KeyName": "stream5qa_etl_key",
+    "KeyName": "dev_etl_key",
     "SecurityGroupIds": [
      {
       "Fn::GetAtt": [
@@ -1098,7 +1098,7 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "stream5qa_etl_instance"
+      "Value": "dev_etl_instance"
      }
     ],
     "UserData": {
@@ -1123,7 +1123,7 @@
      ]
     },
     "Description": "IP Parameter value stored",
-    "Name": "/stream5qa/myapp/ec2ipbucket",
+    "Name": "/dev/myapp/ec2ipbucket",
     "Tier": "Standard"
    },
    "Metadata": {
@@ -1138,7 +1138,7 @@
      "Ref": "ScriptBucketAAD020DD"
     },
     "Description": "S3 ScriptBucket Parameter value stored",
-    "Name": "/stream5qa/myapp/scriptbucket",
+    "Name": "/dev/myapp/scriptbucket",
     "Tier": "Standard"
    },
    "Metadata": {
@@ -1153,7 +1153,7 @@
      "Ref": "FeedBucket0A59BD93"
     },
     "Description": "S3 FeedBucket Parameter value stored",
-    "Name": "/stream5qa/myapp/feedbucket",
+    "Name": "/dev/myapp/feedbucket",
     "Tier": "Standard"
    },
    "Metadata": {
@@ -1164,9 +1164,9 @@
    "Type": "AWS::SSM::Parameter",
    "Properties": {
     "Type": "String",
-    "Value": "stream5qa_demoGlueJob",
+    "Value": "dev_demoGlueJob",
     "Description": "GlueJob Parameter value stored",
-    "Name": "/stream5qa/myapp/gluejob",
+    "Name": "/dev/myapp/gluejob",
     "Tier": "Standard"
    },
    "Metadata": {
@@ -1177,7 +1177,7 @@
    "Type": "AWS::SSM::Parameter",
    "Properties": {
     "Type": "String",
-    "Value": "stream5qa",
+    "Value": "dev",
     "Description": "Environment is stored",
     "Name": "/env",
     "Tier": "Standard"
@@ -1190,7 +1190,7 @@
    "Type": "AWS::SSM::Parameter",
    "Properties": {
     "Type": "String",
-    "Value": "sample-code",
+    "Value": "ignite-commons",
     "Description": "Module Name is stored",
     "Name": "/module",
     "Tier": "Standard"
@@ -1202,7 +1202,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/11Ry27CMBD8Fu7GrYhU9QqoRbRSZUHFFW2cBVxiG/lRFEX5965jQtqeZnbW+/DsjD8VfDaBq5/K6jytVcnbbQB5ZiTtW1/wdhHlGQNbHsyNZViAx47VoMsKeEtZgU4r75U17DUaGRIheeAdU6B5u7E1JrlHYWslmxSObG18ACNROHtQNY041hE5Jd5syXyxB+8xeD5PwKrGgLYVLf0JZW7ck46hnPF2d5FJ2oklE7GkCdtYmvyXkW1sDHgvz/qo0RwrFQy/6ROJvKxFgg8IKwh4hYYJp76Jjo3XJqAjPjzIm9yieSCXTxpNYFuU0anQrJyNl36H/8I7NgKUY4M3v33qmPc6Hc0pcxTgQCON7T0dgq7rV0dvo6PiO+k9pGsfqfJPQQqW1lQqH0404WTNQ8Gf+ePkyys1ddEEpZFvMv4AFwBEX0YCAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/11STW/CMAz9LbuHbANtd0AbYpOmCCauyE0NeDQJysdQVfW/z2kpbDu95+c4dp4zls9P8uEOzmGky+OookI26wj6KFjaNmEim1nSR4xivrMX1sMMAraiAlOUIBvOKvSGQiBnxWuyOmbC8sBbQWBks3IVZrlD5SrSdQ5vbGlDBKtRebejilvsq4SSE2+uEGGyhRAwBjnNIMragnElD/0JRX9xR1qBeiybzUlnaaPmQqWCO6xTYfu33NjKpYjX8l6/adzHaYLhNV0ik5elyvABcQERz1AL5emb6e3ipY3omQ8H+kku0TSyyweDNoo16uQp1gvv0qmb4b/wjrUC8mLw5rdPrQjB5KV5snsFHgxy287TIWjbbnQMLnkuvpLOQ972niv/FORg7mxJ/eJUHQ/O3k/k4yP/la9ANPLJRjIoVz3+AHeXtvxHAgAA"
    },
    "Metadata": {
     "aws:cdk:path": "commons-cdk/CDKMetadata/Default"
