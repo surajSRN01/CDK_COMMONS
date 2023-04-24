@@ -13,19 +13,12 @@ def get_mongo_client():
     type = feed_runtime_context.clientType
     log_utils.print_info_logs(' creating mongo_client ')
     host_prop = prop_reader.get_prop(const.mongo_section, 'parameter_store_'+type+'_host')
-    port_prop = prop_reader.get_prop(const.mongo_section, 'parameter_store_'+type+'_port')
     database = prop_reader.get_prop(const.mongo_section, 'database_'+type)
  
     ssm = boto3.client(const.SSM)
-    if "mongo" in feed_runtime_context.x_correlation_id:
-        print("###### Running in test mode, make sure to set MongoIP of your system")
-        host = feed_runtime_context.x_correlation_id.split("-")[-1]
-        port = "27017"
-    else:
-        host_dict = ssm.get_parameter(Name=host_prop, WithDecryption=True)
-        host = host_dict['Parameter']['Value']
-        port_dict = ssm.get_parameter(Name=port_prop, WithDecryption=True)
-        port = port_dict['Parameter']['Value']
+    host_dict = ssm.get_parameter(Name=host_prop, WithDecryption=True)
+    host = host_dict['Parameter']['Value']
+    port="27017"
 
     host_list = host.split(",")
     mongo_uri = get_mongo_uri(database, host_list, port)

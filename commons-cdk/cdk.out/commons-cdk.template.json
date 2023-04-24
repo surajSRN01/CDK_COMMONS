@@ -3,7 +3,11 @@
   "ScriptBucketAAD020DD": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
+<<<<<<< HEAD
+    "BucketName": "ignite-integration-script-file-bucket-2"
+=======
     "BucketName": "dev-script-file-bucket1"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
@@ -14,7 +18,11 @@
   "FeedBucket0A59BD93": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
+<<<<<<< HEAD
+    "BucketName": "ignite-integration-feed-file-bucket-2"
+=======
     "BucketName": "dev-feed-file-bucket1"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
@@ -83,7 +91,11 @@
     "aws:cdk:path": "commons-cdk/FeedBucket/AllowBucketNotificationsTocommonscdklambdafunc3445D7B8"
    }
   },
+<<<<<<< HEAD
+  "igniteintegrationgluejobroleC718FD58": {
+=======
   "devgluejobroleA4E3D5A6": {
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -100,10 +112,17 @@
     }
    },
    "Metadata": {
+<<<<<<< HEAD
+    "aws:cdk:path": "commons-cdk/ignite-integration-glue-job-role/Resource"
+   }
+  },
+  "igniteintegrationgluejobroleDefaultPolicy05871452": {
+=======
     "aws:cdk:path": "commons-cdk/dev-glue-job-role/Resource"
    }
   },
   "devgluejobroleDefaultPolicyFA85FB3A": {
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -216,15 +235,26 @@
      ],
      "Version": "2012-10-17"
     },
+<<<<<<< HEAD
+    "PolicyName": "igniteintegrationgluejobroleDefaultPolicy05871452",
+    "Roles": [
+     {
+      "Ref": "igniteintegrationgluejobroleC718FD58"
+=======
     "PolicyName": "devgluejobroleDefaultPolicyFA85FB3A",
     "Roles": [
      {
       "Ref": "devgluejobroleA4E3D5A6"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
      }
     ]
    },
    "Metadata": {
+<<<<<<< HEAD
+    "aws:cdk:path": "commons-cdk/ignite-integration-glue-job-role/DefaultPolicy/Resource"
+=======
     "aws:cdk:path": "commons-cdk/dev-glue-job-role/DefaultPolicy/Resource"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
    }
   },
   "ignitecommons": {
@@ -241,15 +271,34 @@
         {
          "Ref": "ScriptBucketAAD020DD"
         },
+<<<<<<< HEAD
         "/dev/scripts/main.py"
+=======
+<<<<<<< HEAD
+        "/ignite-integration/scripts/glue_script.py"
+=======
+        "/dev/scripts/glue_script.py"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
        ]
       ]
      }
     },
     "Role": {
+<<<<<<< HEAD
+     "Ref": "igniteintegrationgluejobroleC718FD58"
+=======
      "Ref": "devgluejobroleA4E3D5A6"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
     },
     "DefaultArguments": {
+     "--BUCKET": "bucket",
+     "--EVENT_KEY": "key",
+     "--BRAND": "brand",
+     "--COUNTRY": "country",
+     "--TYPE": "type",
+     "--ENV": "env",
+     "--DATABASE": "db",
      "--extra-py-files": {
       "Fn::Join": [
        "",
@@ -258,14 +307,26 @@
         {
          "Ref": "ScriptBucketAAD020DD"
         },
+<<<<<<< HEAD
+        "/ignite-integration/package/sample-code.zip"
+=======
         "/dev/package/ignite-commons.zip"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
        ]
       ]
      }
     },
     "GlueVersion": "3.0",
     "MaxRetries": 0,
+<<<<<<< HEAD
     "Name": "dev_ignite-commons",
+=======
+<<<<<<< HEAD
+    "Name": "ignite-integration_demoGlueJob",
+=======
+    "Name": "dev_demoGlueJob",
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
     "NumberOfWorkers": 10,
     "WorkerType": "G.1X"
    },
@@ -365,7 +426,11 @@
     "aws:cdk:path": "commons-cdk/ignite-mapping"
    }
   },
+<<<<<<< HEAD
+  "igniteintegrationlambdajobrole91D844A6": {
+=======
   "devlambdajobroleABFC8A29": {
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -382,10 +447,17 @@
     }
    },
    "Metadata": {
+<<<<<<< HEAD
+    "aws:cdk:path": "commons-cdk/ignite-integration-lambda-job-role/Resource"
+   }
+  },
+  "igniteintegrationlambdajobroleDefaultPolicy8D1A8DE4": {
+=======
     "aws:cdk:path": "commons-cdk/dev-lambda-job-role/Resource"
    }
   },
   "devlambdajobroleDefaultPolicy95AD9B77": {
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -450,15 +522,26 @@
      ],
      "Version": "2012-10-17"
     },
+<<<<<<< HEAD
+    "PolicyName": "igniteintegrationlambdajobroleDefaultPolicy8D1A8DE4",
+    "Roles": [
+     {
+      "Ref": "igniteintegrationlambdajobrole91D844A6"
+=======
     "PolicyName": "devlambdajobroleDefaultPolicy95AD9B77",
     "Roles": [
      {
       "Ref": "devlambdajobroleABFC8A29"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
      }
     ]
    },
    "Metadata": {
+<<<<<<< HEAD
+    "aws:cdk:path": "commons-cdk/ignite-integration-lambda-job-role/DefaultPolicy/Resource"
+=======
     "aws:cdk:path": "commons-cdk/dev-lambda-job-role/DefaultPolicy/Resource"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
    }
   },
   "lambdafuncCDB7F2B7": {
@@ -468,11 +551,23 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
+<<<<<<< HEAD
      "S3Key": "b18b62e074fd099991f778b2d832f3ff674c21b7a24a2de959d9bb6cd8cb475a.zip"
+=======
+<<<<<<< HEAD
+     "S3Key": "8e9e047af39c3146f03839bb68d67a5dd6bde727cc0ae2d5014afd9728ac6627.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "igniteintegrationlambdajobrole91D844A6",
+=======
+     "S3Key": "6183769bd203dfcb0446c623358394a470293eac1761389bfc4a4191657038b2.zip"
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
     },
     "Role": {
      "Fn::GetAtt": [
       "devlambdajobroleABFC8A29",
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
       "Arn"
      ]
     },
@@ -483,18 +578,35 @@
       }
      }
     },
+<<<<<<< HEAD
+    "FunctionName": "ignite-integration_etl_func",
+=======
     "FunctionName": "dev_etl_func",
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
     "Handler": "index.lambda_handler",
     "Runtime": "python3.7",
     "Timeout": 60
    },
    "DependsOn": [
+<<<<<<< HEAD
+    "igniteintegrationlambdajobroleDefaultPolicy8D1A8DE4",
+    "igniteintegrationlambdajobrole91D844A6"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "commons-cdk/lambda_func/Resource",
+    "aws:asset:path": "asset.8e9e047af39c3146f03839bb68d67a5dd6bde727cc0ae2d5014afd9728ac6627",
+=======
     "devlambdajobroleDefaultPolicy95AD9B77",
     "devlambdajobroleABFC8A29"
    ],
    "Metadata": {
     "aws:cdk:path": "commons-cdk/lambda_func/Resource",
+<<<<<<< HEAD
     "aws:asset:path": "asset.b18b62e074fd099991f778b2d832f3ff674c21b7a24a2de959d9bb6cd8cb475a",
+=======
+    "aws:asset:path": "asset.6183769bd203dfcb0446c623358394a470293eac1761389bfc4a4191657038b2",
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -601,7 +713,7 @@
      "ReadCapacityUnits": 5,
      "WriteCapacityUnits": 5
     },
-    "TableName": "test"
+    "TableName": "ignite-dynamodb"
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
@@ -1112,7 +1224,11 @@
   "MyCfnKeyPair": {
    "Type": "AWS::EC2::KeyPair",
    "Properties": {
+<<<<<<< HEAD
+    "KeyName": "ignite-integration_etl_key"
+=======
     "KeyName": "dev_etl_key"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
    },
    "Metadata": {
     "aws:cdk:path": "commons-cdk/MyCfnKeyPair"
@@ -1136,7 +1252,11 @@
     "Tags": [
      {
       "Key": "Name",
+<<<<<<< HEAD
+      "Value": "ignite-integration_etl_instance"
+=======
       "Value": "dev_etl_instance"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
      }
     ]
    },
@@ -1175,7 +1295,11 @@
      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664ebsC96584B6F00A464EAD1953AFF4B05118Parameter"
     },
     "InstanceType": "t2.micro",
+<<<<<<< HEAD
+    "KeyName": "ignite-integration_etl_key",
+=======
     "KeyName": "dev_etl_key",
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
     "SecurityGroupIds": [
      {
       "Fn::GetAtt": [
@@ -1190,7 +1314,11 @@
     "Tags": [
      {
       "Key": "Name",
+<<<<<<< HEAD
+      "Value": "ignite-integration_etl_instance"
+=======
       "Value": "dev_etl_instance"
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
      }
     ],
     "UserData": {
@@ -1215,7 +1343,11 @@
      ]
     },
     "Description": "IP Parameter value stored",
+<<<<<<< HEAD
+    "Name": "/ignite-integration/myapp/ec2ipbucket",
+=======
     "Name": "/dev/myapp/ec2ipbucket",
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
     "Tier": "Standard"
    },
    "Metadata": {
@@ -1230,7 +1362,11 @@
      "Ref": "ScriptBucketAAD020DD"
     },
     "Description": "S3 ScriptBucket Parameter value stored",
+<<<<<<< HEAD
+    "Name": "/ignite-integration/myapp/scriptbucket",
+=======
     "Name": "/dev/myapp/scriptbucket",
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
     "Tier": "Standard"
    },
    "Metadata": {
@@ -1245,7 +1381,11 @@
      "Ref": "FeedBucket0A59BD93"
     },
     "Description": "S3 FeedBucket Parameter value stored",
+<<<<<<< HEAD
+    "Name": "/ignite-integration/myapp/feedbucket",
+=======
     "Name": "/dev/myapp/feedbucket",
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
     "Tier": "Standard"
    },
    "Metadata": {
@@ -1256,9 +1396,19 @@
    "Type": "AWS::SSM::Parameter",
    "Properties": {
     "Type": "String",
+<<<<<<< HEAD
     "Value": "dev_ignite-mapping",
+=======
+<<<<<<< HEAD
+    "Value": "ignite-integration_demoGlueJob",
+    "Description": "GlueJob Parameter value stored",
+    "Name": "/ignite-integration/myapp/gluejob",
+=======
+    "Value": "dev_demoGlueJob",
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
     "Description": "GlueJob Parameter value stored",
     "Name": "/dev/myapp/gluejob",
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
     "Tier": "Standard"
    },
    "Metadata": {
@@ -1269,7 +1419,11 @@
    "Type": "AWS::SSM::Parameter",
    "Properties": {
     "Type": "String",
+<<<<<<< HEAD
+    "Value": "ignite-integration",
+=======
     "Value": "dev",
+>>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
     "Description": "Environment is stored",
     "Name": "/env",
     "Tier": "Standard"

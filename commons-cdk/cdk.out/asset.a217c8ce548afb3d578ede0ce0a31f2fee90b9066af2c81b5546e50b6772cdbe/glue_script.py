@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import main_process_flow as flow
 from awsglue.transforms import *
 import boto3
@@ -8,21 +7,22 @@ from awsglue.context import GlueContext
 from awsglue.job import Job
 import sys
 
-
+args = getResolvedOptions(sys.argv, [])
+print("sys : ",args)
 sc = SparkContext()
 glueContext = GlueContext(sc.getOrCreate())
 spark = glueContext.spark_session
 job = Job(glueContext)
-args = getResolvedOptions(sys.argv, ['JOB_NAME','BUCKET','EVENT_KEY','BRAND', 'COUNTRY','TYPE', 'ENV','DATABASE'])
+print("job : ",job)
+print("sys : ",sys.argv)
+args = getResolvedOptions(sys.argv, ['JOB_NAME','BUCKET','EVENT_KEY','DATABASE'])
 job.init(args["JOB_NAME"], args)
 ssm = boto3.client('ssm')
+print("job : ",job)
+print("args : ",args)
+bucket=args["BUCKET"]
+db=args["DATABASE"]
 
-print("request context : ",args)
-# flow.main(args["BUCKET"],args["DATABASE"])
+print("inside the glue script",bucket," db ",db)
+# flow.main(bucket,db)
 job.commit()
-=======
-import main as flow
-
-print("inside the glue script")
-flow.main()
->>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e

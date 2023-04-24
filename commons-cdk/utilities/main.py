@@ -1,5 +1,6 @@
 from constructs import Construct
 import os
+import time
 import json
 import boto3
 import shutil
@@ -16,9 +17,8 @@ from aws_cdk import (
     aws_dynamodb as dynamodb
 )
 
-
 class MyAppStack(Stack):
-
+  
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
@@ -28,12 +28,13 @@ class MyAppStack(Stack):
 # ----------------------------------BUCKET-------------------------------------------------------------------
 
         client = boto3.client('s3')
-
+        
         # create s3 buckets
         bucket_script = s3.Bucket(
             self, "ScriptBucket", bucket_name=env + "-" + script_bucket)
         bucket_feed = s3.Bucket(
             self, "FeedBucket", bucket_name=env + "-" + feed_bucket)
+        bucket_name=env + "-" + script_bucket
 
         # client.put_object(Bucket = bucket_script,)
         
@@ -86,8 +87,16 @@ class MyAppStack(Stack):
                                 number_of_workers=10,
 
                                 worker_type="G.1X",
-                                default_arguments={
-                                    '--extra-py-files':  "s3://"+bucket_script.bucket_name+"/"+env+"/package/"+modulename+".zip" },
+                                
+                                default_arguments={                                                          
+                                        '--BUCKET': "bucket",
+                                        '--EVENT_KEY': "key",
+                                        '--BRAND':"brand",
+                                        '--COUNTRY':"country",
+                                        "--TYPE":"type",
+                                        '--ENV':"env",
+                                        '--DATABASE':"db",
+                                    '--extra-py-files':  "s3://"+bucket_script.bucket_name+"/"+env+"/package/"+modulename+".zip" },                                  
                                 command=_glue.CfnJob.JobCommandProperty(
                                     name='glueetl',
                                     
@@ -125,6 +134,7 @@ class MyAppStack(Stack):
         # adding policy statement to lambda role
         lambda_job_role.add_to_policy(policy_statement1)
 
+
 # ---------------------------------------LAMBDA_FUNCTION---------------------------------------------------------
 
         # creating lambda function
@@ -140,27 +150,29 @@ class MyAppStack(Stack):
                                            BUCKET=bucket_feed.bucket_name),
                                        role=lambda_job_role
                                        )
+        
 
 # --------------------------------------ADD_TRIGGER_TO_S3_BUCKET----------------------------------------------
 
         # adding trigger to the lambda function
         # any file uploaded in s3 bucket invokes the lambda function
+        
         bucket_feed.add_object_created_notification(
             notify.LambdaDestination(lambda_func)
         )
+
 
 # --------------------------------------DYNAMODB----------------------------------------------------------
 
         table = dynamodb.Table(
             self,
             "dynamodbtable",
-            table_name="test",
+            table_name="ignite-dynamodb",
             partition_key=dynamodb.Attribute(
                 name="id",
                 type=dynamodb.AttributeType.NUMBER
             )
         )
-
 
 # ---------------------------------------EC2_SERVICES----------------------------------------------------------------
 
@@ -211,7 +223,7 @@ class MyAppStack(Stack):
 
 # ------------------------------------LAUNCH_EC2-----------------------------------------------------------
 
-            # creating ec2 instance
+        # creating ec2 instance
         web_server = ec2.Instance(
             self,
             "myInstance1",
@@ -228,17 +240,16 @@ class MyAppStack(Stack):
             user_data=ec2.UserData.custom(user_data)
         )
 
+# ----------------------------------PARAMETER VALUE----------------------------------------------------
+
+        # creating parameter store for storing values in aws cloud
         EC2IPParam = ssm.StringParameter(self, 'ec2IP',
                                          parameter_name='/'+env + '/myapp/ec2ipbucket',
                                          string_value=web_server.instance_public_ip,
                                          description='IP Parameter value stored',
                                          tier=ssm.ParameterTier.STANDARD
                                          )
-
-
-# ----------------------------------PARAMETER VALUE----------------------------------------------------
-
-        # creating parameter store for storing values in aws cloud
+        
         scriptBucketParam = ssm.StringParameter(self, 'scriptbucket',
                                                 parameter_name='/'+env + '/myapp/scriptbucket',
                                                 string_value=bucket_script.bucket_name,
@@ -273,7 +284,8 @@ class MyAppStack(Stack):
                                           description='Module Name is stored',
                                           tier=ssm.ParameterTier.STANDARD
                                           )
-
+        
+      
     def read_setup_file():
 
         LOCAL_CONFIG_FILE = "utilities/build_parameter.json"

@@ -1,0 +1,6 @@
+{
+	"rules": [{
+			"config_file": "config/glue-commons.json"
+		}
+    ]
+}
