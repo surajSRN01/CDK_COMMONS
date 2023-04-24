@@ -257,7 +257,7 @@
 >>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
    }
   },
-  "demoGlueJob": {
+  "ignitecommons": {
    "Type": "AWS::Glue::Job",
    "Properties": {
     "Command": {
@@ -272,10 +272,14 @@
          "Ref": "ScriptBucketAAD020DD"
         },
 <<<<<<< HEAD
+        "/dev/scripts/main.py"
+=======
+<<<<<<< HEAD
         "/ignite-integration/scripts/glue_script.py"
 =======
         "/dev/scripts/glue_script.py"
 >>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
        ]
       ]
      }
@@ -315,15 +319,111 @@
     "GlueVersion": "3.0",
     "MaxRetries": 0,
 <<<<<<< HEAD
+    "Name": "dev_ignite-commons",
+=======
+<<<<<<< HEAD
     "Name": "ignite-integration_demoGlueJob",
 =======
     "Name": "dev_demoGlueJob",
 >>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
     "NumberOfWorkers": 10,
     "WorkerType": "G.1X"
    },
    "Metadata": {
-    "aws:cdk:path": "commons-cdk/demoGlueJob"
+    "aws:cdk:path": "commons-cdk/ignite-commons"
+   }
+  },
+  "ignitefinance": {
+   "Type": "AWS::Glue::Job",
+   "Properties": {
+    "Command": {
+     "Name": "glueetl",
+     "PythonVersion": "3",
+     "ScriptLocation": {
+      "Fn::Join": [
+       "",
+       [
+        "s3://",
+        {
+         "Ref": "ScriptBucketAAD020DD"
+        },
+        "/dev/scripts/main.py"
+       ]
+      ]
+     }
+    },
+    "Role": {
+     "Ref": "devgluejobroleA4E3D5A6"
+    },
+    "DefaultArguments": {
+     "--extra-py-files": {
+      "Fn::Join": [
+       "",
+       [
+        "s3://",
+        {
+         "Ref": "ScriptBucketAAD020DD"
+        },
+        "/dev/package/ignite-finance.zip"
+       ]
+      ]
+     }
+    },
+    "GlueVersion": "3.0",
+    "MaxRetries": 0,
+    "Name": "dev_ignite-finance",
+    "NumberOfWorkers": 10,
+    "WorkerType": "G.1X"
+   },
+   "Metadata": {
+    "aws:cdk:path": "commons-cdk/ignite-finance"
+   }
+  },
+  "ignitemapping": {
+   "Type": "AWS::Glue::Job",
+   "Properties": {
+    "Command": {
+     "Name": "glueetl",
+     "PythonVersion": "3",
+     "ScriptLocation": {
+      "Fn::Join": [
+       "",
+       [
+        "s3://",
+        {
+         "Ref": "ScriptBucketAAD020DD"
+        },
+        "/dev/scripts/main.py"
+       ]
+      ]
+     }
+    },
+    "Role": {
+     "Ref": "devgluejobroleA4E3D5A6"
+    },
+    "DefaultArguments": {
+     "--extra-py-files": {
+      "Fn::Join": [
+       "",
+       [
+        "s3://",
+        {
+         "Ref": "ScriptBucketAAD020DD"
+        },
+        "/dev/package/ignite-mapping.zip"
+       ]
+      ]
+     }
+    },
+    "GlueVersion": "3.0",
+    "MaxRetries": 0,
+    "Name": "dev_ignite-mapping",
+    "NumberOfWorkers": 10,
+    "WorkerType": "G.1X"
+   },
+   "Metadata": {
+    "aws:cdk:path": "commons-cdk/ignite-mapping"
    }
   },
 <<<<<<< HEAD
@@ -452,6 +552,9 @@
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
 <<<<<<< HEAD
+     "S3Key": "b18b62e074fd099991f778b2d832f3ff674c21b7a24a2de959d9bb6cd8cb475a.zip"
+=======
+<<<<<<< HEAD
      "S3Key": "8e9e047af39c3146f03839bb68d67a5dd6bde727cc0ae2d5014afd9728ac6627.zip"
     },
     "Role": {
@@ -459,6 +562,7 @@
       "igniteintegrationlambdajobrole91D844A6",
 =======
      "S3Key": "6183769bd203dfcb0446c623358394a470293eac1761389bfc4a4191657038b2.zip"
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
     },
     "Role": {
      "Fn::GetAtt": [
@@ -497,8 +601,12 @@
    ],
    "Metadata": {
     "aws:cdk:path": "commons-cdk/lambda_func/Resource",
+<<<<<<< HEAD
+    "aws:asset:path": "asset.b18b62e074fd099991f778b2d832f3ff674c21b7a24a2de959d9bb6cd8cb475a",
+=======
     "aws:asset:path": "asset.6183769bd203dfcb0446c623358394a470293eac1761389bfc4a4191657038b2",
 >>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -1289,11 +1397,15 @@
    "Properties": {
     "Type": "String",
 <<<<<<< HEAD
+    "Value": "dev_ignite-mapping",
+=======
+<<<<<<< HEAD
     "Value": "ignite-integration_demoGlueJob",
     "Description": "GlueJob Parameter value stored",
     "Name": "/ignite-integration/myapp/gluejob",
 =======
     "Value": "dev_demoGlueJob",
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
     "Description": "GlueJob Parameter value stored",
     "Name": "/dev/myapp/gluejob",
 >>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
@@ -1324,7 +1436,7 @@
    "Type": "AWS::SSM::Parameter",
    "Properties": {
     "Type": "String",
-    "Value": "ignite-commons",
+    "Value": "ignite-mapping",
     "Description": "Module Name is stored",
     "Name": "/module",
     "Tier": "Standard"

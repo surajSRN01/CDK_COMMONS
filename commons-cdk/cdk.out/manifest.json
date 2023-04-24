@@ -18,10 +18,14 @@
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
 <<<<<<< HEAD
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/815af4afa34c839c590ed79cc959a94cf6fb41bf92f0d957cfe9d3a7f21660d8.json",
+=======
+<<<<<<< HEAD
         "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/189c5f31955399543dc4453df3d1f73174412ac77afc0b1b7287473ecc6e03ef.json",
 =======
         "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a6ef7bc49dea4e58dcc3cafaffe25a1d51c8cd59050b93f8c03389bef547a67f.json",
 >>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -86,10 +90,22 @@
 >>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
           }
         ],
-        "/commons-cdk/demoGlueJob": [
+        "/commons-cdk/ignite-commons": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "demoGlueJob"
+            "data": "ignitecommons"
+          }
+        ],
+        "/commons-cdk/ignite-finance": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ignitefinance"
+          }
+        ],
+        "/commons-cdk/ignite-mapping": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ignitemapping"
           }
         ],
 <<<<<<< HEAD

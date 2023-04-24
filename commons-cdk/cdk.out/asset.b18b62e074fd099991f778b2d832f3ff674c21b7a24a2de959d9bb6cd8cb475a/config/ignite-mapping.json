@@ -1,0 +1,7 @@
+{
+    "job_name": "ignite-mapping",
+    "configurations": [{
+            "database": "MONGODB"
+        }
+    ]
+}

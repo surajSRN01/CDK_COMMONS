@@ -1,6 +1,5 @@
 {
 	"rules": [{
-
 			"pattern": "^.*ignite/upload/([A-Za-z0-9-._]+)([_])([A-Za-z0-9-_]+)",
 			"config_file": "config/ignite-commons.json"
 		},

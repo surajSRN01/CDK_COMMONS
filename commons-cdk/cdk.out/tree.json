@@ -323,9 +323,9 @@
               "version": "2.65.0"
             }
           },
-          "demoGlueJob": {
-            "id": "demoGlueJob",
-            "path": "commons-cdk/demoGlueJob",
+          "ignite-commons": {
+            "id": "ignite-commons",
+            "path": "commons-cdk/ignite-commons",
             "attributes": {
               "aws:cdk:cloudformation:type": "AWS::Glue::Job",
               "aws:cdk:cloudformation:props": {
@@ -341,10 +341,14 @@
                           "Ref": "ScriptBucketAAD020DD"
                         },
 <<<<<<< HEAD
+                        "/dev/scripts/main.py"
+=======
+<<<<<<< HEAD
                         "/ignite-integration/scripts/glue_script.py"
 =======
                         "/dev/scripts/glue_script.py"
 >>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
                       ]
                     ]
                   }
@@ -384,10 +388,116 @@
                 "glueVersion": "3.0",
                 "maxRetries": 0,
 <<<<<<< HEAD
+                "name": "dev_ignite-commons",
+                "numberOfWorkers": 10,
+                "workerType": "G.1X"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_glue.CfnJob",
+              "version": "2.65.0"
+            }
+          },
+          "ignite-finance": {
+            "id": "ignite-finance",
+            "path": "commons-cdk/ignite-finance",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Glue::Job",
+              "aws:cdk:cloudformation:props": {
+                "command": {
+                  "name": "glueetl",
+                  "pythonVersion": "3",
+                  "scriptLocation": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "s3://",
+                        {
+                          "Ref": "ScriptBucketAAD020DD"
+                        },
+                        "/dev/scripts/main.py"
+                      ]
+                    ]
+                  }
+                },
+                "role": {
+                  "Ref": "devgluejobroleA4E3D5A6"
+                },
+                "defaultArguments": {
+                  "--extra-py-files": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "s3://",
+                        {
+                          "Ref": "ScriptBucketAAD020DD"
+                        },
+                        "/dev/package/ignite-finance.zip"
+                      ]
+                    ]
+                  }
+                },
+                "glueVersion": "3.0",
+                "maxRetries": 0,
+                "name": "dev_ignite-finance",
+                "numberOfWorkers": 10,
+                "workerType": "G.1X"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_glue.CfnJob",
+              "version": "2.65.0"
+            }
+          },
+          "ignite-mapping": {
+            "id": "ignite-mapping",
+            "path": "commons-cdk/ignite-mapping",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Glue::Job",
+              "aws:cdk:cloudformation:props": {
+                "command": {
+                  "name": "glueetl",
+                  "pythonVersion": "3",
+                  "scriptLocation": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "s3://",
+                        {
+                          "Ref": "ScriptBucketAAD020DD"
+                        },
+                        "/dev/scripts/main.py"
+                      ]
+                    ]
+                  }
+                },
+                "role": {
+                  "Ref": "devgluejobroleA4E3D5A6"
+                },
+                "defaultArguments": {
+                  "--extra-py-files": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "s3://",
+                        {
+                          "Ref": "ScriptBucketAAD020DD"
+                        },
+                        "/dev/package/ignite-mapping.zip"
+                      ]
+                    ]
+                  }
+                },
+                "glueVersion": "3.0",
+                "maxRetries": 0,
+                "name": "dev_ignite-mapping",
+=======
+<<<<<<< HEAD
                 "name": "ignite-integration_demoGlueJob",
 =======
                 "name": "dev_demoGlueJob",
 >>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
                 "numberOfWorkers": 10,
                 "workerType": "G.1X"
               }
@@ -601,6 +711,9 @@
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
 <<<<<<< HEAD
+                      "s3Key": "b18b62e074fd099991f778b2d832f3ff674c21b7a24a2de959d9bb6cd8cb475a.zip"
+=======
+<<<<<<< HEAD
                       "s3Key": "8e9e047af39c3146f03839bb68d67a5dd6bde727cc0ae2d5014afd9728ac6627.zip"
                     },
                     "role": {
@@ -608,6 +721,7 @@
                         "igniteintegrationlambdajobrole91D844A6",
 =======
                       "s3Key": "6183769bd203dfcb0446c623358394a470293eac1761389bfc4a4191657038b2.zip"
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -1793,11 +1907,15 @@
                   "aws:cdk:cloudformation:props": {
                     "type": "String",
 <<<<<<< HEAD
+                    "value": "dev_ignite-mapping",
+=======
+<<<<<<< HEAD
                     "value": "ignite-integration_demoGlueJob",
                     "description": "GlueJob Parameter value stored",
                     "name": "/ignite-integration/myapp/gluejob",
 =======
                     "value": "dev_demoGlueJob",
+>>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
                     "description": "GlueJob Parameter value stored",
                     "name": "/dev/myapp/gluejob",
 >>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
@@ -1858,7 +1976,7 @@
                   "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
                   "aws:cdk:cloudformation:props": {
                     "type": "String",
-                    "value": "ignite-commons",
+                    "value": "ignite-mapping",
                     "description": "Module Name is stored",
                     "name": "/module",
                     "tier": "Standard"
