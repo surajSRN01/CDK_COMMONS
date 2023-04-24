@@ -70,11 +70,10 @@ class MyAppStack(Stack):
 
 
 # ---------------------------------------GLUE_JOB----------------------------------------------------------------
-        f
+        
         # creating glue job
         glue_job = _glue.CfnJob(self,
-                                'demoGlueJob',
-                               
+                                'demoGlueJob',                               
                                 role=glue_job_role.role_name,
                                 glue_version="3.0",
                                 name=env + "_demoGlueJob",
