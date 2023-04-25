@@ -22,7 +22,7 @@ class MyAppStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        roles, env, script_bucket, feed_bucket= MyAppStack.read_setup_file()
+        roles, env, script_bucket, feed_bucket, module_name= MyAppStack.read_setup_file()
         modulename = None
 
 # ----------------------------------BUCKET-------------------------------------------------------------------
@@ -96,7 +96,8 @@ class MyAppStack(Stack):
                                         "--TYPE":"type",
                                         '--ENV':"env",
                                         '--DATABASE':"db",
-                                    '--extra-py-files':  "s3://"+bucket_script.bucket_name+"/"+env+"/package/"+modulename+".zip" },                                  
+                                        '--X_CORRELATION_ID':"x_correlation_id",
+                                        '--extra-py-files':  "s3://"+bucket_script.bucket_name+"/"+env+"/package/"+modulename+".zip" },                                  
                                 command=_glue.CfnJob.JobCommandProperty(
                                     name='glueetl',
                                     
@@ -107,9 +108,9 @@ class MyAppStack(Stack):
                                 )
                                 )
 # -------------------------------------------Zipping the module folder--------------------------------------------------------------------------------
+        shutil.make_archive("lambda/resources/"+module_name,
+                            "zip", "lambda/resources/"+module_name)
         
-        shutil.make_archive("lambda/resources/"+modulename,
-                            "zip", "lambda/resources/"+modulename)
         
 # -------------------------------------------IAM_POLICIES_LAMBDA-------------------------------------------------------------------------
         
@@ -244,32 +245,18 @@ class MyAppStack(Stack):
 
         # creating parameter store for storing values in aws cloud
         EC2IPParam = ssm.StringParameter(self, 'ec2IP',
-                                         parameter_name='/'+env + '/myapp/ec2ipbucket',
+                                         parameter_name='/'+env + '/ec2ipbucket',
                                          string_value=web_server.instance_public_ip,
                                          description='IP Parameter value stored',
                                          tier=ssm.ParameterTier.STANDARD
                                          )
         
         scriptBucketParam = ssm.StringParameter(self, 'scriptbucket',
-                                                parameter_name='/'+env + '/myapp/scriptbucket',
+                                                parameter_name='/'+env + '/scriptbucket',
                                                 string_value=bucket_script.bucket_name,
                                                 description='S3 ScriptBucket Parameter value stored',
                                                 tier=ssm.ParameterTier.STANDARD
                                                 )
-
-        feedBucketParam = ssm.StringParameter(self, 'feedbucket',
-                                              parameter_name='/'+env + '/myapp/feedbucket',
-                                              string_value=bucket_feed.bucket_name,
-                                              description='S3 FeedBucket Parameter value stored',
-                                              tier=ssm.ParameterTier.STANDARD
-                                              )
-
-        glueParam = ssm.StringParameter(self, 'gluejob',
-                                        parameter_name='/'+env + '/myapp/gluejob',
-                                        string_value=glue_job.name,
-                                        description='GlueJob Parameter value stored',
-                                        tier=ssm.ParameterTier.STANDARD
-                                        )
 
         envParam = ssm.StringParameter(self, 'env',
                                        parameter_name='/env',
@@ -277,13 +264,6 @@ class MyAppStack(Stack):
                                        description='Environment is stored',
                                        tier=ssm.ParameterTier.STANDARD
                                        )
-
-        moduleParam = ssm.StringParameter(self, 'module_name',
-                                          parameter_name='/module',
-                                          string_value=modulename,
-                                          description='Module Name is stored',
-                                          tier=ssm.ParameterTier.STANDARD
-                                          )
         
       
     def read_setup_file():
@@ -309,9 +289,9 @@ class MyAppStack(Stack):
                     # [roles_policies/role_lambda.json, roles_policies/role_glue.json,sample-code]
                     script_bucket = roles.pop(2)
                     feed_bucket = roles.pop(2)
+                    module_name = roles.pop(2)
                     
-                    
-                    return roles, env, script_bucket, feed_bucket
+                    return roles, env, script_bucket, feed_bucket, module_name
 
             else:
                 print("File is Empty")

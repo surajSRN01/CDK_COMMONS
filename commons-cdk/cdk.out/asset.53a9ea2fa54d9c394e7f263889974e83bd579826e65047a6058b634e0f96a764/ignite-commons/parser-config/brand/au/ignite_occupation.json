@@ -1,0 +1,32 @@
+{
+    "parserType": "xlsx",
+    "sheets": [
+        {
+            "priority": 0,
+            "skip": 1,
+            "index": 1,
+            "fields": [
+                {
+                    "target": "id",
+                    "source": {
+                        "index": 0                    
+                    },
+                    "validations": {
+                        "mandatory": true
+                    }
+                },
+                {
+                    "target": "occupation",
+                    "source": {
+                        "index": 1                     
+                    },
+                    "validations": {
+                        "mandatory": true
+                    }
+                }
+               
+
+            ]
+        }
+    ]
+}

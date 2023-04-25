@@ -1,0 +1,102 @@
+{
+    "parserType": "xlsx",
+    "sheets": [
+        {
+            "priority": 0,
+            "skip": 1,
+            "index": 0,
+            "fields": [
+                {
+                    "target": "web_scraper_order",
+                    "source": {
+                        "index": 0                    
+                    },
+                    "validations": {
+                        "mandatory": true
+                    }
+                },
+                {
+                    "target": "web_scraper_start_url",
+                    "source": {
+                        "index": 1                     
+                    },
+                    "validations": {
+                        "mandatory": true
+                    }
+                },
+                {
+                    "target": "title",
+                    "source": {
+                        "index": 2
+                    },
+                    "validations": {
+                        "mandatory": true
+                    }
+                },
+                {
+                    "target": "title_href",
+                    "source": {
+                        "index": 3
+                    }
+                },
+                {
+                    "target": "model",
+                    "source": {
+                        "index": 4
+                    },
+                    "validations": {
+                        "mandatory": true
+                    }
+                },
+                {
+                    "target": "running",
+                    "source": {
+                        "index": 5
+                    }
+                },
+                {
+                    "target": "fuel_type",
+                    "source": {
+                        "index": 6
+                    }
+                },
+                {
+                    "target": "gear_type",
+                    "source": {
+                        "index": 7
+                    }
+                },
+                {
+                    "target": "registered_in",
+                    "source": {
+                        "index": 8
+                    }
+                },
+                {
+                    "target": "color",
+                    "source": {
+                        "index": 9
+                    }
+                },
+                {
+                    "target": "assembly",
+                    "source": {
+                        "index": 10
+                    }
+                },
+                {
+                    "target": "engine_capacity",
+                    "source": {
+                        "index": 11
+                    }
+                },
+                {
+                    "target": "body_type",
+                    "source": {
+                        "index": 12
+                    }
+                }
+            ]
+        }
+    ]
+}

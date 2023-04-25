@@ -17,15 +17,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-<<<<<<< HEAD
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/815af4afa34c839c590ed79cc959a94cf6fb41bf92f0d957cfe9d3a7f21660d8.json",
-=======
-<<<<<<< HEAD
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/189c5f31955399543dc4453df3d1f73174412ac77afc0b1b7287473ecc6e03ef.json",
-=======
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a6ef7bc49dea4e58dcc3cafaffe25a1d51c8cd59050b93f8c03389bef547a67f.json",
->>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
->>>>>>> 271b7e0d62c3c50f30c425c73406a35cb1d77a20
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1b44d4a197ef656bf7882dfa42a0aa6101f3004ba5f4a28fe30563fff422576a.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -65,18 +57,6 @@
             "data": "FeedBucketAllowBucketNotificationsTocommonscdklambdafunc3445D7B81323CF4D"
           }
         ],
-<<<<<<< HEAD
-        "/commons-cdk/ignite-integration-glue-job-role/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "igniteintegrationgluejobroleC718FD58"
-          }
-        ],
-        "/commons-cdk/ignite-integration-glue-job-role/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "igniteintegrationgluejobroleDefaultPolicy05871452"
-=======
         "/commons-cdk/dev-glue-job-role/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -87,7 +67,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "devgluejobroleDefaultPolicyFA85FB3A"
->>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
           }
         ],
         "/commons-cdk/ignite-commons": [
@@ -108,18 +87,6 @@
             "data": "ignitemapping"
           }
         ],
-<<<<<<< HEAD
-        "/commons-cdk/ignite-integration-lambda-job-role/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "igniteintegrationlambdajobrole91D844A6"
-          }
-        ],
-        "/commons-cdk/ignite-integration-lambda-job-role/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "igniteintegrationlambdajobroleDefaultPolicy8D1A8DE4"
-=======
         "/commons-cdk/dev-lambda-job-role/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -130,7 +97,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "devlambdajobroleDefaultPolicy95AD9B77"
->>>>>>> 041d356e98e8eeec8f5d545e2c53a43ca8ec988e
           }
         ],
         "/commons-cdk/lambda_func/Resource": [
@@ -357,28 +323,10 @@
             "data": "scriptbucket682FD001"
           }
         ],
-        "/commons-cdk/feedbucket/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "feedbucket7216FF07"
-          }
-        ],
-        "/commons-cdk/gluejob/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "gluejob2E8780CD"
-          }
-        ],
         "/commons-cdk/env/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "env28F68B0B"
-          }
-        ],
-        "/commons-cdk/module_name/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "modulename58CF314C"
           }
         ],
         "/commons-cdk/CDKMetadata/Default": [
