@@ -23,13 +23,13 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_s3.Bucket",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "FeedBucket": {
@@ -47,7 +47,7 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "Notifications": {
@@ -59,13 +59,13 @@
                     "path": "commons-cdk/FeedBucket/Notifications/Resource",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.256"
+                  "version": "10.1.265"
                 }
               },
               "AllowBucketNotificationsTocommonscdklambdafunc3445D7B8": {
@@ -95,13 +95,13 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_s3.Bucket",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "dev-glue-job-role": {
@@ -113,7 +113,7 @@
                 "path": "commons-cdk/dev-glue-job-role/Importdev-glue-job-role",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.Resource",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "Resource": {
@@ -138,7 +138,7 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "DefaultPolicy": {
@@ -271,19 +271,19 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.Policy",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_iam.Role",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "ignite-commons": {
@@ -342,7 +342,7 @@
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_glue.CfnJob",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "ignite-finance": {
@@ -401,7 +401,7 @@
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_glue.CfnJob",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "ignite-mapping": {
@@ -460,7 +460,7 @@
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_glue.CfnJob",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "dev-lambda-job-role": {
@@ -472,7 +472,7 @@
                 "path": "commons-cdk/dev-lambda-job-role/Importdev-lambda-job-role",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.Resource",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "Resource": {
@@ -497,7 +497,7 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "DefaultPolicy": {
@@ -582,19 +582,19 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.Policy",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_iam.Role",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "lambda_func": {
@@ -610,7 +610,7 @@
                     "path": "commons-cdk/lambda_func/Code/Stage",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.AssetStaging",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "AssetBucket": {
@@ -618,13 +618,13 @@
                     "path": "commons-cdk/lambda_func/Code/AssetBucket",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_s3.BucketBase",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "Resource": {
@@ -637,7 +637,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "81e69c1f7550ed64eb054bf631579129a5c17ba433390194beafa79a83ececea.zip"
+                      "s3Key": "48506cacff1d5b27442678835d5e259984fec4aa1d513d8418c09c9230c9b666.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -660,13 +660,13 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_lambda.Function",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "BucketNotificationsHandler050a0587b7544547bf325f094a3db834": {
@@ -682,7 +682,7 @@
                     "path": "commons-cdk/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/ImportRole",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "Resource": {
@@ -721,7 +721,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "DefaultPolicy": {
@@ -754,19 +754,19 @@
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                          "version": "2.65.0"
+                          "version": "2.63.2"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.Policy",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.Role",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "Resource": {
@@ -774,13 +774,13 @@
                 "path": "commons-cdk/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Resource",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnResource",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.1.256"
+              "version": "10.1.265"
             }
           },
           "dynamodbtable": {
@@ -814,7 +814,7 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "ScalingRole": {
@@ -822,13 +822,13 @@
                 "path": "commons-cdk/dynamodbtable/ScalingRole",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.Resource",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_dynamodb.Table",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "ETLVpc": {
@@ -855,7 +855,7 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "PublicSubnet1": {
@@ -899,7 +899,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "Acl": {
@@ -907,7 +907,7 @@
                     "path": "commons-cdk/ETLVpc/PublicSubnet1/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "RouteTable": {
@@ -929,7 +929,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "RouteTableAssociation": {
@@ -948,7 +948,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "DefaultRoute": {
@@ -968,7 +968,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "EIP": {
@@ -988,7 +988,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "NATGateway": {
@@ -1016,13 +1016,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "PublicSubnet2": {
@@ -1066,7 +1066,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "Acl": {
@@ -1074,7 +1074,7 @@
                     "path": "commons-cdk/ETLVpc/PublicSubnet2/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "RouteTable": {
@@ -1096,7 +1096,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "RouteTableAssociation": {
@@ -1115,7 +1115,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "DefaultRoute": {
@@ -1135,7 +1135,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "EIP": {
@@ -1155,7 +1155,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "NATGateway": {
@@ -1183,13 +1183,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "PrivateSubnet1": {
@@ -1233,7 +1233,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "Acl": {
@@ -1241,7 +1241,7 @@
                     "path": "commons-cdk/ETLVpc/PrivateSubnet1/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "RouteTable": {
@@ -1263,7 +1263,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "RouteTableAssociation": {
@@ -1282,7 +1282,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "DefaultRoute": {
@@ -1302,13 +1302,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "PrivateSubnet2": {
@@ -1352,7 +1352,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "Acl": {
@@ -1360,7 +1360,7 @@
                     "path": "commons-cdk/ETLVpc/PrivateSubnet2/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "RouteTable": {
@@ -1382,7 +1382,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "RouteTableAssociation": {
@@ -1401,7 +1401,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "DefaultRoute": {
@@ -1421,13 +1421,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "IGW": {
@@ -1446,7 +1446,7 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "VPCGW": {
@@ -1465,13 +1465,13 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_ec2.Vpc",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "web-server-sg": {
@@ -1520,13 +1520,13 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "MyCfnKeyPair": {
@@ -1540,7 +1540,7 @@
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_ec2.CfnKeyPair",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "myInstance1": {
@@ -1556,7 +1556,7 @@
                     "path": "commons-cdk/myInstance1/InstanceRole/ImportInstanceRole",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   },
                   "Resource": {
@@ -1587,13 +1587,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                      "version": "2.65.0"
+                      "version": "2.63.2"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.Role",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "InstanceProfile": {
@@ -1611,7 +1611,7 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "Resource": {
@@ -1660,13 +1660,13 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_ec2.Instance",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-ebs:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": {
@@ -1674,7 +1674,7 @@
             "path": "commons-cdk/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-ebs:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnParameter",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-ebs:C96584B6-F00A-464E-AD19-53AFF4B05118": {
@@ -1682,7 +1682,7 @@
             "path": "commons-cdk/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-ebs:C96584B6-F00A-464E-AD19-53AFF4B05118",
             "constructInfo": {
               "fqn": "aws-cdk-lib.Resource",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "ec2IP": {
@@ -1709,13 +1709,13 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "scriptbucket": {
@@ -1739,13 +1739,13 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "env": {
@@ -1767,13 +1767,13 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "CDKMetadata": {
@@ -1785,7 +1785,7 @@
                 "path": "commons-cdk/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnResource",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               },
               "Condition": {
@@ -1793,13 +1793,13 @@
                 "path": "commons-cdk/CDKMetadata/Condition",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnCondition",
-                  "version": "2.65.0"
+                  "version": "2.63.2"
                 }
               }
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.1.256"
+              "version": "10.1.265"
             }
           },
           "BootstrapVersion": {
@@ -1807,7 +1807,7 @@
             "path": "commons-cdk/BootstrapVersion",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnParameter",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           },
           "CheckBootstrapVersion": {
@@ -1815,13 +1815,13 @@
             "path": "commons-cdk/CheckBootstrapVersion",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnRule",
-              "version": "2.65.0"
+              "version": "2.63.2"
             }
           }
         },
         "constructInfo": {
           "fqn": "aws-cdk-lib.Stack",
-          "version": "2.65.0"
+          "version": "2.63.2"
         }
       },
       "Tree": {
@@ -1829,13 +1829,13 @@
         "path": "Tree",
         "constructInfo": {
           "fqn": "constructs.Construct",
-          "version": "10.1.256"
+          "version": "10.1.265"
         }
       }
     },
     "constructInfo": {
       "fqn": "aws-cdk-lib.App",
-      "version": "2.65.0"
+      "version": "2.63.2"
     }
   }
 }

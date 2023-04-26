@@ -77,7 +77,6 @@ class MyAppStack(Stack):
                 with open(f, mode="r") as fi:
                     file = json.load(fi)
                     modulename = file["job_name"]
-                # creating glue job
                 glue_job = _glue.CfnJob(self,
                                 modulename,
                                 role=glue_job_role.role_name,
@@ -106,9 +105,9 @@ class MyAppStack(Stack):
                                     script_location=f"s3://"+bucket_script.bucket_name +
                                     "/"+env+"/scripts/main.py"
                                 )
-                                )
+                    )
 # -------------------------------------------Zipping the module folder--------------------------------------------------------------------------------
-        shutil.make_archive("lambda/resources/"+module_name,
+                shutil.make_archive("lambda/resources/"+module_name,
                             "zip", "lambda/resources/"+module_name)
         
         
